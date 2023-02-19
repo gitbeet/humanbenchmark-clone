@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const generateNumber = (level: number) => {
   let num = "";
@@ -56,7 +56,7 @@ const NumberMemory = () => {
 
   return (
     <div className="h-64 bg-blue-400 flex flex-col space-y-4 justify-center items-center text-center">
-      <h1>{level?.toString() || "level is null"}</h1>
+      {/* <h1>{level?.toString() || "level is null"}</h1> */}
       {!gameStarted ? (
         <>
           <h2 className="text-2xl font-semibold">Number memory</h2>
@@ -66,7 +66,7 @@ const NumberMemory = () => {
               setLevel(1);
               setShowNumberScreen(true);
             }}
-            className="border-2 p-2"
+            className=""
           >
             Start
           </button>
@@ -93,20 +93,27 @@ const NumberMemory = () => {
           )}
           {showResultScreen && (
             <>
-              <div>
+              <div className="text-2xl">
                 <h2>Number : {number}</h2>
                 <p>
                   Your guess:
-                  <span className={number === input ? "" : "line-through"}>
-                    {" "}
-                    {input}
-                  </span>
+                  {input.split("").map((letter, i) => (
+                    <span
+                      className={`${
+                        letter === number.split("")[i]
+                          ? "font-normal"
+                          : " line-through font-semibold decoration-2"
+                      }`}
+                    >
+                      {letter}
+                    </span>
+                  ))}
                 </p>
               </div>
               {number === input ? (
-                <form>
+                <div>
                   <button onClick={next}>Next</button>
-                </form>
+                </div>
               ) : (
                 <div>
                   <button onClick={tryAgain}>Try again</button>

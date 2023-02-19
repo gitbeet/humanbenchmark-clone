@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+button {
+  @apply bg-blue-500 hover:bg-blue-600 active:bg-blue-500 active:shadow-sm text-2xl text-white font-semibold px-8 py-2 shadow-lg;
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -65,7 +69,7 @@ article > * + * {
 
 /* Inherit fonts for inputs and buttons */
 input,
-button,
+/* button, */
 textarea,
 select {
   font: inherit;
