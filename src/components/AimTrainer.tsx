@@ -6,12 +6,7 @@ const AimTrainer = () => {
   const [pos, setPos] = useState<[number, number]>([50, 50]);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [endTime, setEndTime] = useState<number | null>(null);
-  //   const [showGameScreen , setShowGameScreen] = useState(false)
   const [showResultsScreen, setShowResultsScreen] = useState(false);
-
-  useEffect(() => {
-    setStartTime(Date.now());
-  }, []);
 
   useEffect(() => {
     if (results.length < 10) return;
@@ -19,11 +14,21 @@ const AimTrainer = () => {
   }, [results]);
 
   const shoot = () => {
-    setEndTime(Date.now());
-    if (startTime && endTime) {
-      setResults((prev) => [...prev, endTime - startTime]);
+    if (!results.length) {
+      setStartTime(Date.now());
+      setPos([
+        Math.floor(Math.random() * 100),
+        Math.floor(Math.random() * 100),
+      ]);
+      setResults((prev) => [...prev, 0]);
+      return;
     }
-    setStartTime(endTime);
+    const endT = Date.now();
+    setEndTime(endT);
+    if (startTime) {
+      setResults((prev) => [...prev, endT - startTime]);
+    }
+    setStartTime(endT);
     setPos([Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)]);
   };
   const positionClass = `top-[${pos[0]}] left-[${pos[1]}]`;
@@ -38,7 +43,12 @@ const AimTrainer = () => {
         <>
           {!showResultsScreen ? (
             <div className="w-full h-full relative">
-              <p>{pos}</p>
+              <p>Remaining: {10 - results.length}</p>
+              <div>
+                {results.map((res) => (
+                  <span className="mr-4">{res}</span>
+                ))}
+              </div>
               {results.map((res) => (
                 <li>{res}</li>
               ))}
@@ -52,21 +62,26 @@ const AimTrainer = () => {
               ></div>
             </div>
           ) : (
-            <div>
+            <>
               <h1>
                 Average shooting time is{" "}
-                {results.reduce((acc, result) => acc + result, 0) / 10}ms
+                {Math.floor(
+                  results.reduce((acc, result) => acc + result, 0) / 9
+                )}
+                ms
               </h1>
               <button
                 onClick={() => {
                   setResults([]);
                   setShowResultsScreen(false);
                   setGameStarted(false);
+                  setStartTime(null);
+                  setEndTime(null);
                 }}
               >
                 Try again
               </button>
-            </div>
+            </>
           )}
         </>
       )}
