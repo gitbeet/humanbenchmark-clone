@@ -74,7 +74,7 @@ const ReactionTime = () => {
               : !readyToClick
               ? "bg-red-400"
               : "bg-green-400"
-          } w-64 h-64 flex flex-col justify-center items-center text-center`}
+          } w-full h-64 flex flex-col justify-center items-center text-center`}
           onClick={!gameStarted ? startGame : endGame}
         >
           {!gameStarted && reactionTime ? (
@@ -86,7 +86,7 @@ const ReactionTime = () => {
           <p className="font-semibold">{message}</p>
         </div>
       ) : (
-        <div className="bg-blue-400 w-64 h-64 flex flex-col justify-center items-center space-y-12 text-center">
+        <div className="bg-blue-400 w-full h-64 flex flex-col justify-center items-center space-y-12 text-center">
           <h2 className="font-semibold">
             Your average reaction time is{" "}
             {results.reduce((acc, result) => acc + result.time, 0) / 5}ms!
