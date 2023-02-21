@@ -5,7 +5,6 @@ const grid = new Array(40);
 const populateGrid = (numberOfBlocks: number) => {
   let arr = [...grid];
   let nums = Array.from(Array(numberOfBlocks).keys());
-  let positions = [];
   //   account for repeating positions
   for (let i = 0; i < numberOfBlocks; i++) {
     let position;
