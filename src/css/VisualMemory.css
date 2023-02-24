@@ -1,0 +1,65 @@
+.animation_box__turn {
+  animation: box_turn 1.5s forwards;
+}
+
+.animation_box__fade {
+  animation: box_fade 0.38s forwards;
+}
+
+.animation_empty__turn {
+  animation: empty_turn 0.18s forwards;
+}
+
+@keyframes empty_turn {
+  0% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(10px);
+  }
+  20% {
+    transform: translateX(-10px);
+  }
+  30% {
+    transform: translateX(10px);
+  }
+  40% {
+    transform: translateX(-10px);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  90% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes box_turn {
+  0% {
+    transform: scaleY(1);
+  }
+  10% {
+    transform: scaleY(1.1);
+  }
+  25% {
+    transform: scaleY(0);
+  }
+  40% {
+    transform: scaleY(1.1);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  60% {
+    transform: scaleY(1);
+  }
+  75% {
+    transform: scaleY(1.1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
