@@ -4,6 +4,7 @@ import AimTrainer from "./components/AimTrainer";
 import ChimpTest from "./components/ChimpTest";
 import VisualMemory from "./components/VisualMemory";
 import SequenceMemory from "./components/SequenceMemory";
+import VerbalMemory from "./components/VerbalMemory";
 
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
       <ReactionTime />
       <AimTrainer />
       <ChimpTest />
-      <VisualMemory /> */}
-      <SequenceMemory />
+      <VisualMemory />
+      <SequenceMemory /> */}
+      <VerbalMemory />
     </div>
   );
 }

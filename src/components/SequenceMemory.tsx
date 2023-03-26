@@ -14,7 +14,7 @@ const generateNumberToAdd = (prevNumber: number) => {
   return number;
 };
 
-const initGrid = new Array(9).fill({ position: Array.keys() });
+// const initGrid = new Array(9).fill({ position: Array.keys() });
 
 const initialGrid = [
   { position: 1, visible: false },
