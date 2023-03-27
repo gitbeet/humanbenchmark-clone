@@ -5,6 +5,7 @@ import ChimpTest from "./components/ChimpTest";
 import VisualMemory from "./components/VisualMemory";
 import SequenceMemory from "./components/SequenceMemory";
 import VerbalMemory from "./components/VerbalMemory";
+import TypingSpeed from "./components/TypingSpeed";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
       <ChimpTest />
       <VisualMemory />
       <SequenceMemory /> */}
-      <VerbalMemory />
+      {/* <VerbalMemory /> */}
+      <TypingSpeed />
     </div>
   );
 }
