@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-button {
-  @apply bg-blue-500 hover:bg-blue-600 active:bg-blue-500 active:shadow-sm text-2xl text-white font-semibold px-8 py-2 shadow-lg;
+.wrapper {
+  @apply w-[min(100%,1024px)];
+}
+
+.container-mine {
+  @apply w-full flex justify-center items-center;
 }
 
 /* Box sizing rules */

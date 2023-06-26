@@ -33,7 +33,7 @@ const AimTrainer = () => {
   };
   const positionClass = `top-[${pos[0]}] left-[${pos[1]}]`;
   return (
-    <div className="h-64 w-full bg-blue-400 flex flex-col justify-center items-center">
+    <div className="h-64 w-full bg-blue flex flex-col justify-center items-center">
       {!gameStarted ? (
         <div className="text-center space-y-4">
           <h1>Welcome to aim test</h1>

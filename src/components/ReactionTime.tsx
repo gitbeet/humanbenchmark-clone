@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { reactionTimeIcon } from "../assets/icons";
 
 interface ResultInterface {
   try: number;
@@ -8,7 +9,18 @@ interface ResultInterface {
 const ReactionTime = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [readyToClick, setReadyToClick] = useState(false);
-  const [message, setMessage] = useState("Click to start");
+  const [message, setMessage] = useState<JSX.Element>(
+    <div className="space-y-16 flex flex-col items-center">
+      <div className=" scale-[1.9] animate-pulse w-fit">{reactionTimeIcon}</div>
+      <div className="space-y-4 flex flex-col items-center">
+        <p className="text-7xl font-normal">Reaction Time Test</p>
+        <p className="text-2xl font-normal w-2/3">
+          When the red box turns green, click as quickly as you can. Click
+          anywhere to start.
+        </p>
+      </div>
+    </div>
+  );
   const [startTime, setStartTime] = useState<number | null>(null);
   const [reactionTime, setReactionTime] = useState<number | null>(null);
   const [results, setResults] = useState<ResultInterface[]>([]);
@@ -32,7 +44,7 @@ const ReactionTime = () => {
   const startGame = () => {
     console.log("Start game");
     const delay = Math.floor(1000 + Math.random() * 1000);
-    setMessage("");
+    setMessage(<></>);
     setReactionTime(null);
     setGameStarted(true);
   };
@@ -42,13 +54,13 @@ const ReactionTime = () => {
     console.log("End game");
     setGameStarted(false);
     if (!readyToClick) {
-      setMessage("You clicked too early.");
+      setMessage(<p>You clicked too early.</p>);
       setStartTime(null);
       setReadyToClick(false);
       return;
     }
     if (startTime) {
-      setMessage("Try again");
+      setMessage(<p>Try again</p>);
       setStartTime(null);
       setReadyToClick(false);
       if (results.length <= 5) {
@@ -64,17 +76,17 @@ const ReactionTime = () => {
     }
   };
 
+  useEffect(() => {
+    !gameStarted ? "bg-blue" : !readyToClick ? "bg-red" : "bg-green";
+  }, [gameStarted, readyToClick]);
+
   return (
     <>
       {!resultsStage ? (
         <div
           className={`${
-            !gameStarted
-              ? "bg-blue-400"
-              : !readyToClick
-              ? "bg-red-400"
-              : "bg-green-400"
-          } w-full h-64 flex flex-col justify-center items-center text-center`}
+            !gameStarted ? "bg-blue" : !readyToClick ? "bg-red" : "bg-green"
+          } w-full h-[600px] flex flex-col justify-center items-center text-center`}
           onClick={!gameStarted ? startGame : endGame}
         >
           {!gameStarted && reactionTime ? (
@@ -83,10 +95,10 @@ const ReactionTime = () => {
               <p className="text-2xl">{results.length}/5</p>
             </div>
           ) : null}
-          <p className="font-semibold">{message}</p>
+          <p className="font-semibold text-5xl text-white">{message}</p>
         </div>
       ) : (
-        <div className="bg-blue-400 w-full h-64 flex flex-col justify-center items-center space-y-12 text-center">
+        <div className="bg-blue w-full h-64 flex flex-col justify-center items-center space-y-12 text-center">
           <h2 className="font-semibold">
             Your average reaction time is{" "}
             {results.reduce((acc, result) => acc + result.time, 0) / 5}ms!
@@ -95,7 +107,7 @@ const ReactionTime = () => {
             className="p-2 bg-blue-500 text-white font-bold"
             onClick={() => {
               setResults([]);
-              setMessage("");
+              setMessage(<></>);
               setReactionTime(null);
               setGameStarted(false);
               setReadyToClick(false);
