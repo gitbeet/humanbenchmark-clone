@@ -10,6 +10,14 @@
   @apply w-full flex justify-center items-center;
 }
 
+.game-window {
+  @apply select-none h-[600px] w-full space-y-8 flex flex-col items-center justify-center;
+}
+
+.game-message {
+  @apply py-16;
+}
+
 /* Box sizing rules */
 *,
 *::before,
