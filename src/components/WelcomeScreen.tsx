@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 
 interface Props {
-  logo: JSX.Element;
+  logo?: JSX.Element;
   heading: string;
   description: string | JSX.Element;
   button?: JSX.Element;
+  buttonPosition?: "above" | "below";
 }
 
-const WelcomeScreen = ({ logo, heading, description, button }: Props) => {
+const WelcomeScreen = ({
+  logo,
+  heading,
+  description,
+  button,
+  buttonPosition = "below",
+}: Props) => {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     setIsLoaded(true);
@@ -22,9 +29,11 @@ const WelcomeScreen = ({ logo, heading, description, button }: Props) => {
       <div className=" scale-[1.9] animate-pulse w-fit">{logo}</div>
       <div className="space-y-4 flex flex-col items-center">
         <p className="text-7xl font-normal">{heading}</p>
+        {buttonPosition === "above" ? button : null}
+
         <p className="text-2xl font-normal w-full text-center">{description}</p>
       </div>
-      {button}
+      {buttonPosition === "below" ? button : null}
     </div>
   );
 };

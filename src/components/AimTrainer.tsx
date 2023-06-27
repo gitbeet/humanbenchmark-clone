@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import WelcomeScreen from "./WelcomeScreen";
+import { aimTrainerIcon } from "../assets/icons";
+import ResultsScreen from "./ResultsScreen";
 
 const AimTrainer = () => {
   const [gameStarted, setGameStarted] = useState(false);
@@ -7,9 +10,10 @@ const AimTrainer = () => {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [endTime, setEndTime] = useState<number | null>(null);
   const [showResultsScreen, setShowResultsScreen] = useState(false);
+  const [shot, setShot] = useState(false);
 
   useEffect(() => {
-    if (results.length < 10) return;
+    if (results.length < 11) return;
     setShowResultsScreen(true);
   }, [results]);
 
@@ -26,47 +30,96 @@ const AimTrainer = () => {
     const endT = Date.now();
     setEndTime(endT);
     if (startTime) {
-      setResults((prev) => [...prev, endT - startTime]);
+      // not sure if correct amount
+      setResults((prev) => [...prev, endT - startTime - 90]);
     }
     setStartTime(endT);
     setPos([Math.floor(Math.random() * 100), Math.floor(Math.random() * 100)]);
   };
   const positionClass = `top-[${pos[0]}] left-[${pos[1]}]`;
   return (
-    <div className="h-64 w-full bg-blue flex flex-col justify-center items-center">
+    <div className="game-window bg-blue">
       {!gameStarted ? (
-        <div className="text-center space-y-4">
-          <h1>Welcome to aim test</h1>
-          <button onClick={() => setGameStarted(true)}>Start game</button>
-        </div>
+        <WelcomeScreen
+          buttonPosition="above"
+          heading="Aim Trainer"
+          button={
+            <div
+              onClick={() => {
+                shoot();
+                setGameStarted(true);
+              }}
+              className="relative flex items-center justify-center w-24 h-24 border-2 border-white bg-neutral-blue  rounded-full before:w-full before:h-[2px] before:bg-white before:absolute after:w-[2px] after:h-full after:bg-white after:absolute  "
+            >
+              <div className="flex justify-center items-center w-16 h-16 border-2 border-white rounded-full">
+                <div className="absolute w-8 h-8 border-2 border-white rounded-full"></div>
+              </div>
+            </div>
+          }
+          description="Hit 10 targets as quickly as you can.Click the target above to begin."
+        />
       ) : (
         <>
           {!showResultsScreen ? (
             <div className="w-full h-full relative">
-              <p>Remaining: {10 - results.length}</p>
-              <div>
+              <p className="text-white text-3xl w-full text-center pt-6">
+                <span className="opacity-75">Remaining</span>{" "}
+                {11 - results.length}
+              </p>
+              {/* <div>
                 {results.map((res) => (
                   <span className="mr-4">{res}</span>
                 ))}
               </div>
               {results.map((res) => (
                 <li>{res}</li>
-              ))}
+              ))} */}
               <div
                 style={{
-                  top: `${pos[0] < 20 ? 20 : pos[0] > 80 ? 80 : pos[0]}%`,
-                  left: `${pos[1] < 15 ? 15 : pos[1] > 85 ? 85 : pos[1]}%`,
+                  top: `${pos[0] < 40 ? 20 : pos[0] > 80 ? 80 : pos[0]}%`,
+                  left: `${pos[1] < 35 ? 35 : pos[1] > 65 ? 65 : pos[1]}%`,
                 }}
-                onClick={shoot}
-                className="absolute w-16 h-16 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"
-              ></div>
+                onClick={() => {
+                  shoot();
+                  setShot(true);
+                }}
+                onAnimationEnd={() => setShot(false)}
+                className={`
+                  ${
+                    shot ? "animation-appear" : ""
+                  } absolute flex items-center justify-center w-24 h-24 border-2 border-white bg-neutral-blue  rounded-full  before:w-full before:h-[2px] before:bg-white before:absolute after:w-[2px] after:h-full after:bg-white after:absolute origin-center`}
+              >
+                <div className="flex justify-center items-center w-16 h-16 border-2 border-white rounded-full">
+                  <div className="absolute w-8 h-8 border-2 border-white rounded-full"></div>
+                </div>
+              </div>
             </div>
           ) : (
             <>
-              <h1>
+              <ResultsScreen
+                logo={aimTrainerIcon}
+                result={
+                  <>
+                    {Math.floor(
+                      results.reduce((acc, result) => acc + result, 0) / 10
+                    )}
+                    ms
+                  </>
+                }
+                heading="Average shooting time is"
+                onClickSave={() => {}}
+                onClickTryAgain={() => {
+                  setResults([]);
+                  setShowResultsScreen(false);
+                  setGameStarted(false);
+                  setStartTime(null);
+                  setEndTime(null);
+                }}
+              />
+              {/* <h1>
                 Average shooting time is{" "}
                 {Math.floor(
-                  results.reduce((acc, result) => acc + result, 0) / 9
+                  results.reduce((acc, result) => acc + result, 0) / 10
                 )}
                 ms
               </h1>
@@ -80,7 +133,7 @@ const AimTrainer = () => {
                 }}
               >
                 Try again
-              </button>
+              </button> */}
             </>
           )}
         </>
