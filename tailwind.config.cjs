@@ -19,6 +19,7 @@ module.exports = {
       "neutral-900": "#333333",
       "neutral-blue": "#94c2e7",
       blue: "#2b87d1",
+      "dark-blue": "#2573c1",
       yellow: "#ffd154",
       red: "#f53264",
       orange: "#ff9345",

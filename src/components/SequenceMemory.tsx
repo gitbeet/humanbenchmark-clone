@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import Button from "./Button";
+import ResultsScreen from "./ResultsScreen";
+import { sequenceMemoryIcon } from "../assets/icons";
 
 //generate a  random number between 1-9
 const generateNumber = () => {
@@ -83,11 +86,10 @@ const SequenceMemory = () => {
     }
     if (!isEqual) {
       setGameState("defeat");
-      setSequence([generateNumber()]);
-      setPlayerSequence([]);
       setResultsScreen(true);
       return;
     }
+    console.log(sequence);
   }, [playerSequence]);
 
   const handleClick = (box: { position: number; visible: boolean }) => {
@@ -111,35 +113,52 @@ const SequenceMemory = () => {
   };
 
   return (
-    <div className=" w-full h-[500px] flex flex-col justify-center items-center bg-blue-400">
+    <div className=" game-window bg-blue">
       <div>
-        <h1>{gameState}</h1>
+        {/* <h1>{gameState}</h1>
         <h1>Player sequence - {playerSequence.toString()}</h1>
         <h1>Sequence - {sequence.toString()}</h1>
-        <h1>{watchState.toString()}</h1>
+        <h1>{watchState.toString()}</h1> */}
       </div>
       {!resultsScreen ? (
-        <div className={` grid grid-cols-3 grid-rows-3 gap-2`}>
-          {grid.map((box) => (
-            <div
-              onClick={() => handleClick(box)}
-              className={`${
-                watchState ? "pointer-events-none" : ""
-              } w-20 h-20 rounded-md cursor-pointer transition-all duration-[150ms] ${
-                box.visible ? "bg-white" : " bg-blue-500"
-              }`}
-            ></div>
-          ))}
-        </div>
+        <>
+          <h1 className="text-white text-4xl">
+            <span className="opacity-75">Level: </span>
+            {sequence.length}
+          </h1>
+          <div className={` grid grid-cols-3 grid-rows-3 gap-4`}>
+            {grid.map((box) => (
+              <div
+                onClick={() => handleClick(box)}
+                className={`${
+                  watchState ? "pointer-events-none" : ""
+                } w-28 h-28 rounded-md cursor-pointer transition-all duration-[150ms] ${
+                  box.visible ? "bg-white" : " bg-dark-blue"
+                }`}
+              ></div>
+            ))}
+          </div>
+        </>
       ) : (
-        <div>
-          <h1>{gameState === "victory" ? "Great job!" : "Game Over"}</h1>
-          {gameState === "victory" ? (
-            <button onClick={() => setResultsScreen(false)}>Continue</button>
-          ) : (
-            <button onClick={() => setResultsScreen(false)}>Try Again</button>
-          )}
-        </div>
+        <ResultsScreen
+          logo={sequenceMemoryIcon}
+          heading="Sequence Memory"
+          result={<>Level {sequence.length}</>}
+          onClickSave={() => {}}
+          onClickTryAgain={() => {
+            setResultsScreen(false);
+            setSequence([generateNumber()]);
+            setPlayerSequence([]);
+          }}
+        />
+        // <div>
+        //   <h1 className="text-white text-7xl">Level {sequence.length}</h1>
+        //   <p>Save your score to see how you compare.</p>
+        //   <div className="flex gap-4">
+        //     <Button text="Save Score" color="yellow" onClick={() => {}} />
+        //     <Button text="Try Again" onClick={() => setResultsScreen(false)} />
+        //   </div>
+        // </div>
       )}
     </div>
   );
