@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 import ResultsScreen from "./ResultsScreen";
 import { sequenceMemoryIcon } from "../assets/icons";
+import WelcomeScreen from "./WelcomeScreen";
 
 //generate a  random number between 1-9
 const generateNumber = () => {
@@ -31,19 +32,17 @@ const initialGrid = [
   { position: 9, visible: false },
 ];
 const SequenceMemory = () => {
-  const [level, setLevel] = useState(1);
   const [sequence, setSequence] = useState<number[]>([generateNumber()]);
   const [playerSequence, setPlayerSequence] = useState<number[]>([]);
   const [resultsScreen, setResultsScreen] = useState(false);
   const [grid, setGrid] = useState(initialGrid);
-  const [watchState, setWatchState] = useState(true);
-  const [gameState, setGameState] = useState<"playing" | "victory" | "defeat">(
-    "playing"
-  );
+  const [watchState, setWatchState] = useState(false);
+  const [gameState, setGameState] = useState<
+    "playing" | "victory" | "defeat" | "idle"
+  >("idle");
 
   useEffect(() => {
-    if (gameState === "defeat") return;
-
+    if (gameState === "defeat" || gameState === "idle") return;
     setWatchState(true);
     const p = () => {
       sequence.forEach((element, index) => {
@@ -62,8 +61,8 @@ const SequenceMemory = () => {
                 return el.position === element ? { ...el, visible: false } : el;
               })
             );
-          }, 500);
-        }, 800 + (index + 1) * 800);
+          }, 300);
+        }, 500 + (index + 1) * 500);
       });
     };
     p();
@@ -71,12 +70,12 @@ const SequenceMemory = () => {
   }, [gameState]);
 
   useEffect(() => {
+    if (playerSequence.length < 1 && sequence.length === 1) return;
     setGameState("playing");
     const isEqual = playerSequence.every((el, index) => el === sequence[index]);
     const isVictory = isEqual && playerSequence.length === sequence.length;
     if (isVictory) {
       setGameState("victory");
-      setLevel((prev) => prev + 1);
       setGrid(initialGrid);
       setPlayerSequence([]);
       setSequence((prev) => [
@@ -89,7 +88,6 @@ const SequenceMemory = () => {
       setResultsScreen(true);
       return;
     }
-    console.log(sequence);
   }, [playerSequence]);
 
   const handleClick = (box: { position: number; visible: boolean }) => {
@@ -114,31 +112,40 @@ const SequenceMemory = () => {
 
   return (
     <div className=" game-window bg-blue">
-      <div>
-        {/* <h1>{gameState}</h1>
-        <h1>Player sequence - {playerSequence.toString()}</h1>
-        <h1>Sequence - {sequence.toString()}</h1>
-        <h1>{watchState.toString()}</h1> */}
-      </div>
       {!resultsScreen ? (
-        <>
-          <h1 className="text-white text-4xl">
-            <span className="opacity-75">Level: </span>
-            {sequence.length}
-          </h1>
-          <div className={` grid grid-cols-3 grid-rows-3 gap-4`}>
-            {grid.map((box) => (
-              <div
-                onClick={() => handleClick(box)}
-                className={`${
-                  watchState ? "pointer-events-none" : ""
-                } w-28 h-28 rounded-md cursor-pointer transition-all duration-[150ms] ${
-                  box.visible ? "bg-white" : " bg-dark-blue"
-                }`}
-              ></div>
-            ))}
-          </div>
-        </>
+        gameState === "idle" ? (
+          <WelcomeScreen
+            logo={sequenceMemoryIcon}
+            heading="Sequence Memory Test"
+            description="Memorize the pattern."
+            button={
+              <Button
+                text="Start"
+                color="yellow"
+                onClick={() => setGameState("playing")}
+              />
+            }
+          />
+        ) : (
+          <>
+            <h1 className="text-white text-4xl">
+              <span className="opacity-75">Level: </span>
+              {sequence.length}
+            </h1>
+            <div className={` grid grid-cols-3 grid-rows-3 gap-4`}>
+              {grid.map((box) => (
+                <div
+                  onClick={() => handleClick(box)}
+                  className={`${
+                    watchState ? "pointer-events-none" : ""
+                  } w-28 h-28 rounded-md cursor-pointer transition-all duration-[150ms] ${
+                    box.visible ? "bg-white" : " bg-dark-blue"
+                  }`}
+                ></div>
+              ))}
+            </div>
+          </>
+        )
       ) : (
         <ResultsScreen
           logo={sequenceMemoryIcon}
@@ -149,16 +156,9 @@ const SequenceMemory = () => {
             setResultsScreen(false);
             setSequence([generateNumber()]);
             setPlayerSequence([]);
+            setGameState("idle");
           }}
         />
-        // <div>
-        //   <h1 className="text-white text-7xl">Level {sequence.length}</h1>
-        //   <p>Save your score to see how you compare.</p>
-        //   <div className="flex gap-4">
-        //     <Button text="Save Score" color="yellow" onClick={() => {}} />
-        //     <Button text="Try Again" onClick={() => setResultsScreen(false)} />
-        //   </div>
-        // </div>
       )}
     </div>
   );
