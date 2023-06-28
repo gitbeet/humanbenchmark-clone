@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import WelcomeScreen from "./WelcomeScreen";
 import { chimpTestIcon } from "../assets/icons";
 import Button from "./Button";
+import ResultsScreen from "./ResultsScreen";
 
 const grid = new Array(40);
 
@@ -99,31 +100,35 @@ const ChimpTest = () => {
           }
         />
       ) : showResultScreen ? (
-        <div className="text-center">
+        <>
           {triesLeft > 0 ? (
-            <>
-              <h2 className="text-xl">NUMBERS</h2>
-              <h2 className="text-xl">{blocks}</h2>
-              <br />
-              <h2>STRIKES</h2>
-              <h2>{3 - triesLeft} / 3</h2>
-              <button
+            <div className="text-center text-white space-y-8">
+              <div className="space-y-4">
+                <h2 className="text-4xl">NUMBERS</h2>
+                <h2 className="text-8xl">{blocks}</h2>
+              </div>
+              <div className="space-y-2">
+                <h2 className="text-4xl">STRIKES</h2>
+                <h2 className="text-4xl">{3 - triesLeft} of 3</h2>
+              </div>
+              <Button
+                text="Continue"
+                color="yellow"
                 onClick={() => {
                   setResultArray([]);
                   setGrid(populateGrid(blocks));
                   setShowNumbers(true);
                   setShowResultScreen(false);
                 }}
-              >
-                Continue
-              </button>
-            </>
+              />
+            </div>
           ) : (
             <>
-              <h2>Score</h2>
-              <h1>{blocks}</h1>
-              <button
-                onClick={() => {
+              <ResultsScreen
+                logo={chimpTestIcon}
+                result={blocks.toString()}
+                heading="Score"
+                onClickTryAgain={() => {
                   setGameStarted(false);
                   setBlocks(4);
                   setGrid(populateGrid(4));
@@ -132,22 +137,25 @@ const ChimpTest = () => {
                   setShowResultScreen(false);
                   setTriesLeft(3);
                 }}
-              >
-                Try Again
-              </button>
+                onClickSave={() => {}}
+              />
             </>
           )}
-        </div>
+        </>
       ) : (
-        <div className="w-fit h-fit px-16 py-12 grid grid-cols-8 grid-rows-5 gap-1">
+        <div className="w-fit h-fit px-16 py-12 grid grid-cols-8 grid-rows-5 gap-2">
           {grid.map((box, index) =>
             box.visible ? (
               <div
                 key={index}
                 onClick={() => onItemClick(box.value, index)}
-                className={`${box.value ? "border-4 border-white" : ""} ${
-                  !showNumbers && box.value && "bg-white"
-                } w-16 h-16 rounded-lg flex justify-center items-center text-white font-semibold text-3xl cursor-pointer`}
+                className={`${
+                  box.value
+                    ? "border-4 border-neutral-blue border-opacity-50 hover:border-opacity-100"
+                    : ""
+                } ${
+                  !showNumbers && box.value && "bg-white border-0"
+                } w-20 h-20 rounded-xl flex justify-center items-center text-white font-semibold text-5xl cursor-pointer transition-all duration-75 `}
               >
                 {showNumbers ? box.value : ""}
               </div>
