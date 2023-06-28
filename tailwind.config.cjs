@@ -18,6 +18,7 @@ module.exports = {
       "neutral-100": "#e6e8f4",
       "neutral-900": "#333333",
       "neutral-blue": "#94c2e7",
+      "light-blue": "#4dadfa",
       blue: "#2b87d1",
       "dark-blue": "#2573c1",
       yellow: "#ffd154",

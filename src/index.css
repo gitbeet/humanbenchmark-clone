@@ -24,6 +24,37 @@
   /* opacity: 0; */
 }
 
+.animation-time-left {
+  animation: time-left 2s linear forwards;
+}
+
+.animation-flash-white {
+}
+
+.animation-flash-red {
+  animation: flash-red 1.4s forwards;
+}
+
+.animation-flash-white {
+  animation: flash-white 1.4s forwards;
+}
+
+@keyframes flash-red {
+  0% {
+    background-color: #f53264;
+  }
+  100% {
+  }
+}
+
+@keyframes flash-white {
+  0% {
+    background-color: #e6e8f4;
+  }
+  100% {
+  }
+}
+
 @keyframes appear {
   0% {
     transform: scale(0%);
@@ -32,6 +63,15 @@
   100% {
     transform: scale(100%);
     /* opacity: 1; */
+  }
+}
+
+@keyframes time-left {
+  0% {
+    transform: scaleX(100%);
+  }
+  100% {
+    transform: scaleX(0%);
   }
 }
 

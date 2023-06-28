@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-
+import WelcomeScreen from "./WelcomeScreen";
+import { numberMemoryIcon } from "../assets/icons";
+import Button from "./Button";
 const generateNumber = (level: number) => {
   let num = "";
   for (var i = 0; i < level; i++) {
@@ -26,7 +28,7 @@ const NumberMemory = () => {
     timeout = setTimeout(() => {
       setShowNumberScreen(false);
       setShowInputScreen(true);
-    }, 3000);
+    }, 2000);
     return () => clearTimeout(timeout);
   }, [showNumberScreen]);
   // ANY!
@@ -36,87 +38,154 @@ const NumberMemory = () => {
     setShowResultScreen(true);
   };
 
-  const tryAgain = () => {
+  const tryAgain = (e: any) => {
+    e.preventDefault();
+    setGameStarted(false);
     setLevel(null);
-    setLevel(1);
-    setNumber(generateNumber(1));
-    setInput("");
-    setGameStarted(true);
-    setShowNumberScreen(true);
     setShowInputScreen(false);
     setShowResultScreen(false);
   };
 
-  const next = () => {
+  const next = (e: any) => {
+    e.preventDefault();
     setLevel((prev) => {
       return prev !== null ? prev + 1 : 1;
     });
     setShowNumberScreen(true);
   };
 
+  useEffect(() => {
+    const listenerNext = (e: any) => {
+      if (e.key === "Enter" || e.key === "NumpadEnter") {
+        console.log("Enter key was pressed. Run your function.");
+        e.preventDefault();
+        next;
+        console.log("listenernext");
+      }
+    };
+    const listenerTryAgain = (e: any) => {
+      if (e.key === "Enter" || e.key === "NumpadEnter") {
+        console.log("Enter key was pressed. Run your function.");
+        e.preventDefault();
+        tryAgain;
+        console.log("listenertryagain");
+      }
+    };
+    if (showResultScreen && number === input) {
+      document.addEventListener("keydown", listenerNext);
+    }
+    if (showResultScreen && number !== input) {
+      document.addEventListener("keydown", listenerTryAgain);
+    }
+    return () => {
+      document.removeEventListener("keydown", listenerNext);
+      document.removeEventListener("keydown", listenerTryAgain);
+    };
+  }, []);
+
   return (
-    <div className="h-64 bg-blue-400 flex flex-col space-y-4 justify-center items-center text-center">
-      {/* <h1>{level?.toString() || "level is null"}</h1> */}
+    <div
+      className={`${
+        showResultScreen && number === input ? "animation-flash-white" : ""
+      } ${
+        showResultScreen && number !== input ? "animation-flash-red" : ""
+      }  game-window text-center text-white bg-blue`}
+    >
       {!gameStarted ? (
         <>
-          <h2 className="text-2xl font-semibold">Number memory</h2>
-          <button
-            onClick={() => {
-              setGameStarted(true);
-              setLevel(1);
-              setShowNumberScreen(true);
-            }}
-            className=""
-          >
-            Start
-          </button>
+          <WelcomeScreen
+            logo={numberMemoryIcon}
+            heading="Number Memory"
+            description="The average person can remember 7 numbers at once.Can you do more?"
+            button={
+              <Button
+                text="Start"
+                color="yellow"
+                onClick={() => {
+                  setGameStarted(true);
+                  setLevel(1);
+                  setShowNumberScreen(true);
+                  setNumber(generateNumber(1));
+                  setInput("");
+                }}
+              />
+            }
+          />
         </>
       ) : (
         <>
           {showNumberScreen && (
-            <div>
-              <h1>Try to remember the number</h1>
-              <h2>{number}</h2>
+            <div className="space-y-8">
+              <h2 className="text-7xl font-semibold">{number}</h2>
+              <div className="w-24 bg-white h-1 origin-left animation-time-left"></div>
             </div>
           )}
           {showInputScreen && (
-            <div>
-              <h2>Guess the number</h2>
-              <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+            <div className="w-full flex flex-col items-center justify-center gap-8">
+              <div>
+                <h2 className="text-2xl">What was the number?</h2>
+                <p className="text-lg opacity-75">Please enter to submit</p>
+              </div>
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col justify-center items-center gap-8  w-[min(100%,1000px)] "
+              >
                 <input
+                  autoFocus
                   onChange={(e) => setInput(e.target.value)}
-                  className="border border-black"
+                  className="bg-dark-blue w-[min(100%,1000px)] h-16 text-3xl focus:outline-none active:outline-none focus:border  active:border focus:border-light-blue active:border-light-blue rounded-sm text-center"
                 />{" "}
-                <button type="submit">Submit</button>
+                <Button color="yellow" text="Submit" type="submit" />
               </form>
             </div>
           )}
           {showResultScreen && (
             <>
-              <div className="text-2xl">
-                <h2>Number : {number}</h2>
-                <p>
-                  Your guess:
-                  {input.split("").map((letter, i) => (
-                    <span
-                      className={`${
-                        letter === number.split("")[i]
-                          ? "font-normal"
-                          : " line-through font-semibold decoration-2"
-                      }`}
-                    >
-                      {letter}
-                    </span>
-                  ))}
-                </p>
-              </div>
-              {number === input ? (
-                <div>
-                  <button onClick={next}>Next</button>
+              <div className="space-y-8">
+                <div className="text-center">
+                  <p className="opacity-75">Number</p>
+                  <h2 className="text-4xl">{number}</h2>
                 </div>
+                <div className="text-center">
+                  <p className="opacity-75">Your answer</p>
+                  <h2 className="text-4xl">
+                    {" "}
+                    {input.split("").map((letter, i) => (
+                      <span
+                        className={`${
+                          letter === number.split("")[i]
+                            ? "font-normal"
+                            : "text-neutral-900 line-through font-semibold decoration-2"
+                        }`}
+                      >
+                        {letter}
+                      </span>
+                    ))}
+                  </h2>
+                </div>
+              </div>
+              <div className="text-6xl">Level {level}</div>
+              {number === input ? (
+                <Button
+                  text="Next"
+                  color="yellow"
+                  type="button"
+                  onClick={next}
+                />
               ) : (
-                <div>
-                  <button onClick={tryAgain}>Try again</button>
+                <div className="flex gap-4">
+                  <Button
+                    text="Save Score"
+                    color="yellow"
+                    type="button"
+                    onClick={() => {}}
+                  />
+                  <Button
+                    text="Try Again"
+                    color=""
+                    type="button"
+                    onClick={tryAgain}
+                  />
                 </div>
               )}
             </>
