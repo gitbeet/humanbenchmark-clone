@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
+import Button from "./Button";
+import WelcomeScreen from "./WelcomeScreen";
+import { verbalMemoryIcon } from "../assets/icons";
+import ResultsScreen from "./ResultsScreen";
 
 const VerbalMemory = () => {
+  const [gameStarted, setGameStarted] = useState(false);
   const [wordList, setWordList] = useState<string[]>([]);
   const [currentWord, setCurrentWord] = useState<string>("");
   const [triesLeft, setTriesLeft] = useState<number>(3);
@@ -67,36 +72,77 @@ const VerbalMemory = () => {
   };
 
   const restartGame = () => {
+    setGameStarted(false);
     setShowResultsScreen(false);
     setTriesLeft(3);
+    setStreak(0);
     setWordList([]);
     fetchSingleWord();
   };
 
   return (
-    <div>
-      {!showResultsScreen ? (
-        <div>
-          <h1>Verbal memory</h1>
-          <h2>Streak: {streak}</h2>
-          <h2>Tries left: {triesLeft}</h2>
-          <h2>Current word : {currentWord}</h2>
-          <button onClick={fetchWord}>Fetch a word</button>
-          <button onClick={() => checkWord("new")}>New</button>
-          <button onClick={() => checkWord("seen")}>Seen</button>
-          <ul>
+    <div className="game-window bg-blue text-white">
+      {!gameStarted ? (
+        <WelcomeScreen
+          logo={verbalMemoryIcon}
+          heading="Verbal Memory Test"
+          description="You will be shown words, one at a time. If you've seen a word during the test, click SEEN If it's a new word, click NEW"
+          button={
+            <Button
+              text="Start"
+              color="yellow"
+              onClick={() => setGameStarted(true)}
+            />
+          }
+        />
+      ) : !showResultsScreen ? (
+        <div className="flex flex-col items-center justify-center gap-8">
+          <div className="flex gap-12">
+            <h2 className="text-2xl">
+              <span className="opacity-75">Lives |</span> {triesLeft}
+            </h2>
+            <h2 className="text-2xl">
+              <span className="opacity-75">Score |</span> {streak}
+            </h2>
+          </div>
+          <h2 className="text-5xl">{currentWord}</h2>
+          {/* <button onClick={fetchWord}>Fetch a word</button> */}
+          <div className="flex gap-8">
+            <Button
+              text={<p className="font-bold">SEEN</p>}
+              color="yellow"
+              onClick={() => checkWord("seen")}
+            />
+            <Button
+              text={<p className="font-bold">NEW</p>}
+              color="yellow"
+              onClick={() => checkWord("new")}
+            />
+          </div>
+          {/* <ul>
             {wordList.map((word, index) => (
               <li key={index}>{word}</li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       ) : (
-        <div>
-          <h2>Game over</h2>
-          <h2>Streak: {streak}</h2>
+        <ResultsScreen
+          logo={verbalMemoryIcon}
+          heading="Verbal Memory"
+          result={
+            <p>
+              {streak} word{streak > 1 || streak < 1 ? "s" : ""}
+            </p>
+          }
+          onClickSave={() => {}}
+          onClickTryAgain={restartGame}
+        />
+        // <div>
+        //   <h2>Game over</h2>
+        //   <h2>Streak: {streak}</h2>
 
-          <button onClick={restartGame}>Try again</button>
-        </div>
+        //   <button onClick={restartGame}>Try again</button>
+        // </div>
       )}
     </div>
   );

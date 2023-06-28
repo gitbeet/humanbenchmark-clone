@@ -105,8 +105,9 @@ const GameGrid = ({ setCurrentGame }: Props) => {
   return (
     <div className="container-mine">
       <div className="md:grid grid-cols-3 gap-6 w-[min(100%,1000px)] p-12 wrapper">
-        {gridItems.map((item) => (
+        {gridItems.map((item, index) => (
           <GameItem
+            key={index}
             setCurrentGame={setCurrentGame}
             title={item.title}
             description={item.description}

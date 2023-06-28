@@ -130,7 +130,7 @@ const ReactionTime = () => {
               <p className="text-3xl">Click to keep going</p>
             </div>
           ) : null}
-          <p className="font-semibold text-5xl text-white">{message}</p>
+          <div className="font-semibold text-5xl text-white">{message}</div>
         </div>
       ) : (
         <ResultsScreen
