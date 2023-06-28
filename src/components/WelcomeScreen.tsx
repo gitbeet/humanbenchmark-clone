@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 interface Props {
   logo?: JSX.Element;
-  heading: string;
+  heading: string | JSX.Element;
   description: string | JSX.Element;
   button?: JSX.Element;
   buttonPosition?: "above" | "below";

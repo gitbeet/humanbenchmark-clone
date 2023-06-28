@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import WelcomeScreen from "./WelcomeScreen";
+import { chimpTestIcon } from "../assets/icons";
+import Button from "./Button";
 
 const grid = new Array(40);
 
@@ -34,6 +37,7 @@ const ChimpTest = () => {
   const [resultArray, setResultArray] = useState<number[]>([]);
   const [showResultScreen, setShowResultScreen] = useState(false);
   const [triesLeft, setTriesLeft] = useState(3);
+  const [gameStarted, setGameStarted] = useState(false);
 
   let sortedArr = grid
     .map((element) => element.value)
@@ -72,8 +76,29 @@ const ChimpTest = () => {
   };
 
   return (
-    <div className="w-full h-[500px] bg-blue-400 flex justify-center items-center">
-      {showResultScreen ? (
+    <div className="game-window bg-blue">
+      {!gameStarted ? (
+        <WelcomeScreen
+          logo={chimpTestIcon}
+          heading={
+            <p className="text-5xl">Are You Smarter Than a Chimpanzee?</p>
+          }
+          description={
+            <p>
+              Click the squares in order according to their numbers.
+              <br />
+              The test will get progressively harder.
+            </p>
+          }
+          button={
+            <Button
+              text="Start Test"
+              color="yellow"
+              onClick={() => setGameStarted(true)}
+            />
+          }
+        />
+      ) : showResultScreen ? (
         <div className="text-center">
           {triesLeft > 0 ? (
             <>
@@ -99,6 +124,7 @@ const ChimpTest = () => {
               <h1>{blocks}</h1>
               <button
                 onClick={() => {
+                  setGameStarted(false);
                   setBlocks(4);
                   setGrid(populateGrid(4));
                   setResultArray([]);
