@@ -3,7 +3,7 @@ import React from "react";
 interface Props {
   text: string | JSX.Element;
   color?: string;
-  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit" | "reset" | undefined;
 }
 

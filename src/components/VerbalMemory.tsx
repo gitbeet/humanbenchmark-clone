@@ -106,7 +106,6 @@ const VerbalMemory = () => {
             </h2>
           </div>
           <h2 className="text-5xl">{currentWord}</h2>
-          {/* <button onClick={fetchWord}>Fetch a word</button> */}
           <div className="flex gap-8">
             <Button
               text={<p className="font-bold">SEEN</p>}
@@ -119,11 +118,6 @@ const VerbalMemory = () => {
               onClick={() => checkWord("new")}
             />
           </div>
-          {/* <ul>
-            {wordList.map((word, index) => (
-              <li key={index}>{word}</li>
-            ))}
-          </ul> */}
         </div>
       ) : (
         <ResultsScreen
@@ -137,12 +131,6 @@ const VerbalMemory = () => {
           onClickSave={() => {}}
           onClickTryAgain={restartGame}
         />
-        // <div>
-        //   <h2>Game over</h2>
-        //   <h2>Streak: {streak}</h2>
-
-        //   <button onClick={restartGame}>Try again</button>
-        // </div>
       )}
     </div>
   );
