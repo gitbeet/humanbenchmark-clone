@@ -2,6 +2,10 @@
   animation: box_turn 0.7s forwards;
 }
 
+.animation_box__turn__away {
+  animation: box_turn__away 0.7s forwards;
+}
+
 .animation_box__turn__clicked {
   animation: box_turn__clicked 0.7s forwards;
 }
@@ -63,6 +67,23 @@
   75% {
     transform: scaleY(1.03);
   }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes box_turn__away {
+  0% {
+    transform: scaleY(1);
+  }
+  10% {
+    transform: scaleY(1.03);
+  }
+
+  40% {
+    transform: scaleY(1.03);
+  }
+
   100% {
     transform: scaleY(0);
   }

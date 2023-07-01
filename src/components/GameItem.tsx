@@ -38,10 +38,7 @@ const GameItem = ({
   gameId,
 }: Props) => {
   return (
-    <div
-      onClick={() => setCurrentGame(gameId)}
-      className="group relative rounded-md  bg-white w-full flex flex-col justify-start items-center gap-6 py-8 px-8 cursor-pointer hover:-translate-y-3 hover:shadow-lg transition-position duration-300 ease-in-out"
-    >
+    <>
       <div className="flex flex-col items-center ">
         <div className="text-neutral-blue group-hover:text-orange">{icon}</div>
         <h3 className="font-bold text-2xl w-full text-center">{title}</h3>
@@ -52,7 +49,7 @@ const GameItem = ({
           New
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 

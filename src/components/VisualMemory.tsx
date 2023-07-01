@@ -100,13 +100,13 @@ const VisualMemory = () => {
   };
   return (
     <div className="game-window bg-blue">
-      <p className="w-full text-left text-xl text-white absolute z-[100] pointer-events-none">
+      {/* <p className="w-full text-left text-xl text-white absolute z-[100] pointer-events-none">
         grid size -{Math.ceil(Math.sqrt((level + 2) * 2))}
         <br />
         level - {level}
         <br />
         initialTurn - {initialTurn.toString()}
-      </p>
+      </p> */}
       {!gameStarted ? (
         <WelcomeScreen
           logo={visualMemoryIcon}

@@ -104,17 +104,26 @@ interface Props {
 const GameGrid = ({ setCurrentGame }: Props) => {
   return (
     <div className="container-mine">
-      <div className="md:grid grid-cols-3 gap-6 w-[min(100%,1000px)] p-12 wrapper">
+      <div className="md:grid space-y-6 md:space-y-0 grid-cols-6  gap-6 w-[min(100%,1000px)] p-12 wrapper">
         {gridItems.map((item, index) => (
-          <GameItem
-            key={index}
-            setCurrentGame={setCurrentGame}
-            title={item.title}
-            description={item.description}
-            icon={item.icon}
-            newGame={item.newGame}
-            gameId={item.gameId}
-          />
+          <div
+            onClick={() => setCurrentGame(item.gameId)}
+            className={`group relative rounded-md  bg-white w-full flex flex-col justify-start items-center gap-6 py-8 px-8 cursor-pointer hover:-translate-y-3 hover:shadow-lg transition-position duration-300 ease-in-out ${
+              item.gameId === "visualMemory" || item.gameId === "typing"
+                ? "col-span-3"
+                : "col-span-2"
+            }`}
+          >
+            <GameItem
+              key={index}
+              setCurrentGame={setCurrentGame}
+              title={item.title}
+              description={item.description}
+              icon={item.icon}
+              newGame={item.newGame}
+              gameId={item.gameId}
+            />
+          </div>
         ))}
       </div>
     </div>
