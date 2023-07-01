@@ -1,5 +1,9 @@
 .animation_box__turn {
-  animation: box_turn 1.5s forwards;
+  animation: box_turn 0.7s forwards;
+}
+
+.animation_box__turn__clicked {
+  animation: box_turn__clicked 0.7s forwards;
 }
 
 .animation_box__fade {
@@ -7,7 +11,7 @@
 }
 
 .animation_empty__turn {
-  animation: empty_turn 0.18s forwards;
+  animation: empty_turn 0.38s forwards;
 }
 
 @keyframes empty_turn {
@@ -15,22 +19,22 @@
     transform: translateX(0);
   }
   10% {
-    transform: translateX(10px);
+    transform: translateX(6px);
   }
   20% {
-    transform: translateX(-10px);
+    transform: translateX(-6px);
   }
   30% {
-    transform: translateX(10px);
+    transform: translateX(6px);
   }
   40% {
-    transform: translateX(-10px);
+    transform: translateX(-6px);
   }
   50% {
     transform: translateX(0);
   }
   90% {
-    transform: translateX(-10px);
+    transform: translateX(-6px);
   }
   100% {
     transform: translateX(0);
@@ -42,13 +46,13 @@
     transform: scaleY(1);
   }
   10% {
-    transform: scaleY(1.1);
+    transform: scaleY(1.03);
   }
   25% {
     transform: scaleY(0);
   }
   40% {
-    transform: scaleY(1.1);
+    transform: scaleY(1.03);
   }
   50% {
     transform: scaleY(1);
@@ -57,9 +61,36 @@
     transform: scaleY(1);
   }
   75% {
-    transform: scaleY(1.1);
+    transform: scaleY(1.03);
   }
   100% {
     transform: scaleY(0);
+  }
+}
+
+@keyframes box_turn__clicked {
+  0% {
+    transform: scaleY(1);
+  }
+  10% {
+    transform: scaleY(1.03);
+  }
+  25% {
+    transform: scaleY(0);
+  }
+  40% {
+    transform: scaleY(1.03);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  60% {
+    transform: scaleY(1);
+  }
+  75% {
+    transform: scaleY(1.03);
+  }
+  100% {
+    transform: scaleY(1);
   }
 }

@@ -8,7 +8,7 @@ import {
   sequenceMemoryIcon,
   typingIcon,
   verbalMemoryIcon,
-  visualMemoryItem,
+  visualMemoryIcon,
 } from "../assets/icons";
 
 interface gridItemsInterface {
@@ -73,7 +73,7 @@ const gridItems: gridItemsInterface[] = [
   {
     title: "Visual Memory",
     description: "Remember an increasingly large board of squares.",
-    icon: visualMemoryItem,
+    icon: visualMemoryIcon,
     newGame: false,
     gameId: "visualMemory",
   },
