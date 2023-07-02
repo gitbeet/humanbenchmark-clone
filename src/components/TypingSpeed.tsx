@@ -6,15 +6,26 @@ const initialText =
 const TypingSpeed = () => {
   const [text, setText] = useState<string[]>(initialText.split(""));
   const [userInput, setUserInput] = useState<string[]>([]);
+  const [gameStarted, setGameStarted] = useState(false);
   const [focused, setFocused] = useState(false);
 
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   return (
-    <div className="game-window bg-blue flex flex-col items-center justify-center">
-      <h1>Typing speed test</h1>
-      <p>{userInput.length}</p>
-      <div className="relative flex flex-col items-center">
-        <div className="relative z-10 w-[800px] pointer-events-none ">
+    <div className="game-window bg-blue text-white">
+      <div>
+        <h1 className="text-7xl text-center">
+          {!gameStarted ? "Typing Test" : "92"}
+        </h1>
+        <h1 className="text-3xl ">How many words per minute can you type?</h1>
+      </div>
+      <div
+        onClick={() => {
+          inputRef.current?.focus();
+          inputRef.current?.setSelectionRange(text.length, text.length);
+        }}
+        className="flex flex-col w-[800px] h-[200px] p-4 bg-neutral-100 items-center rounded-lg relative "
+      >
+        <div className="relative z-10 w-full h-full  pointer-events-none ">
           <div className="absolute z-[101] w-full  bg-[rgba(255,255,255,0)]  flex flex-wrap ">
             {text.map((letter) => (
               <p className={`text-neutral-900 w-fit h-fit`}>
@@ -22,7 +33,7 @@ const TypingSpeed = () => {
               </p>
             ))}
           </div>
-          <div className="absolute z-[100]     bg-[rgba(255,255,255,0)] bg-orange flex flex-wrap items-start justify-start">
+          <div className="absolute z-[100]      bg-[rgba(255,255,255,0)] flex flex-wrap items-start justify-start">
             {userInput.map((letter, index) => (
               <p
                 className={`${
@@ -35,23 +46,21 @@ const TypingSpeed = () => {
           </div>
         </div>
         <textarea
+          autoFocus
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           ref={inputRef}
           value={userInput.join("")}
-          onChange={(e) => setUserInput(e.target.value.split(""))}
-          className={`pointer-events-none caret-[rgb(255,34,34)] opacity-100 bg-[rgba(255,255,255,0)] text-[rgba(255,255,255,0)]  absolute z-[200] w-full focus:outline-none h-[200px] `}
-        />
-        <div
-          onClick={() => {
-            inputRef.current?.focus();
-            inputRef.current?.setSelectionRange(text.length, text.length);
+          onChange={(e) => {
+            if (!gameStarted) {
+              setGameStarted(true);
+            }
+            setUserInput(e.target.value.split(""));
           }}
-          className={`${
-            focused ? "opacity-100" : "opacity-50"
-          } absolute w-[800px] h-[200px] bg-neutral-blue border border-dark-blue`}
-        ></div>
+          className={`pointer-events-none caret-[rgb(255,34,34)] opacity-100 bg-[rgba(255,255,255,0)] text-[rgba(255,255,255,0    )]  absolute top-0 rounded-lg z-[200] w-full focus:outline-none h-full p-4`}
+        />
       </div>
+      <p>{!gameStarted ? "Start typing to begin." : "1:32"}</p>
     </div>
   );
 };
