@@ -11,7 +11,7 @@ const AimTrainer = () => {
   const [endTime, setEndTime] = useState<number | null>(null);
   const [showResultsScreen, setShowResultsScreen] = useState(false);
   const [shot, setShot] = useState(false);
-
+  // test
   useEffect(() => {
     if (results.length < 11) return;
     setShowResultsScreen(true);
