@@ -1,15 +1,12 @@
 import React from "react";
 import Header from "./Header";
+import { Outlet } from "react-router-dom";
 
-interface Props {
-  children: JSX.Element;
-}
-
-const Layout = ({ children }: Props) => {
+const Layout = () => {
   return (
     <div>
       <Header />
-      {children}
+      <Outlet />
       <div>footer</div>
     </div>
   );

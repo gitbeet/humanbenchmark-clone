@@ -107,6 +107,7 @@ const GameGrid = ({ setCurrentGame }: Props) => {
       <div className="md:grid space-y-6 md:space-y-0 grid-cols-6  gap-6 w-[min(100%,1000px)] p-12 wrapper">
         {gridItems.map((item, index) => (
           <div
+            key={index}
             onClick={() => setCurrentGame(item.gameId)}
             className={`group relative rounded-md  bg-white w-full flex flex-col justify-start items-center gap-6 py-8 px-8 cursor-pointer hover:-translate-y-3 hover:shadow-lg transition-position duration-300 ease-in-out ${
               item.gameId === "visualMemory" || item.gameId === "typing"

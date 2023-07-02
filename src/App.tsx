@@ -39,7 +39,7 @@ function App() {
     ) : currentGame === "visualMemory" ? (
       <VisualMemory />
     ) : (
-      <TypingSpeed />
+      <ReactionTime />
     );
   return (
     <div className="flex flex-col space-y-8 min-w-[100dvw] min-h-[100dvh]  bg-neutral-100">
