@@ -1,14 +1,9 @@
-import React from "react";
-import { useAuth } from "../context/AuthContext";
-
 interface Props {
   gameName: string;
   result: string;
 }
 
 const ResultTable = ({ gameName, result }: Props) => {
-  const { userResults, localStorageResults } = useAuth();
-
   return (
     <tr>
       <td>{gameName}</td>

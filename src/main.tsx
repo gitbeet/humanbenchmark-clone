@@ -10,7 +10,6 @@ import Successful from "./components/Successful";
 import Dashboard from "./components/Dashboard";
 import { Provider } from "react-redux";
 import store from "../src/utilities/store";
-import { useUserStatus } from "./features/auth/userAuthStatus";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
