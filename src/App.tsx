@@ -8,6 +8,7 @@ import VerbalMemory from "./components/VerbalMemory";
 import TypingSpeed from "./components/TypingSpeed";
 import GameGrid from "./components/GameGrid";
 import { useState } from "react";
+import HomeScreenGame from "./components/HomeScreenGame";
 
 function App() {
   const [currentGame, setCurrentGame] = useState<
@@ -43,15 +44,7 @@ function App() {
     );
   return (
     <div className="flex flex-col space-y-8 min-w-[100dvw] min-h-[100dvh]  bg-neutral-100">
-      {/* <NumberMemory /> */}
-      {/* <ReactionTime /> */}
-      {/* <AimTrainer /> */}
-      {/* <ChimpTest /> */}
-      {/* <VisualMemory /> */}
-      {/* <SequenceMemory /> */}
-      {/* <VerbalMemory /> */}
-      {/* <TypingSpeed /> */}
-      <div>{displayedGame}</div>
+      <div>{<HomeScreenGame />}</div>
       <GameGrid setCurrentGame={setCurrentGame} />
     </div>
   );

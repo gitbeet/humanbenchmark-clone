@@ -10,7 +10,7 @@ const Header = () => {
     dispatch(logout());
   };
   return (
-    <div className="container-mine shadow-lg">
+    <div className="container-mine shadow-md bg-white">
       <h1>{user?.email}</h1>
       <div className="py-3 px-8 flex justify-between  text-neutral-900 wrapper">
         <div className="flex gap-6">

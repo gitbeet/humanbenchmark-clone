@@ -10,6 +10,8 @@ import Successful from "./components/Successful";
 import Dashboard from "./components/Dashboard";
 import { Provider } from "react-redux";
 import store from "../src/utilities/store";
+import NotFound from "./components/NotFound";
+import GameScreen from "./components/GameScreen";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -22,6 +24,11 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             <Route path="register" element={<Register />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="successful" element={<Successful />} />
+            <Route path="test">
+              <Route index element={<NotFound />} />
+              <Route path="/test/:gameName" element={<GameScreen />} />
+            </Route>
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

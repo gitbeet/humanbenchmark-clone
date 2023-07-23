@@ -9,11 +9,11 @@ const Layout = () => {
   useUserStatus();
   useOnSnapshot();
   return (
-    <>
+    <div className="bg-neutral-100 min-h-screen">
       <Header />
       <Outlet />
       <div>footer</div>
-    </>
+    </div>
   );
 };
 
