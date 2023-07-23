@@ -30,18 +30,13 @@ interface Props {
     | "visualMemory";
 }
 
-const GameItem = ({
-  icon,
-  title,
-  description,
-  newGame,
-  setCurrentGame,
-  gameId,
-}: Props) => {
+const GameItem = ({ icon, title, description, newGame }: Props) => {
   return (
     <>
       <div className="flex flex-col items-center ">
-        <div className="text-neutral-blue group-hover:text-orange">{icon}</div>
+        <div className="text-neutral-blue group-hover:text-orange p-6 scale-75">
+          {icon}
+        </div>
         <h3 className="font-bold text-2xl w-full text-center">{title}</h3>
       </div>
       <p className="text-lg  text-center">{description}</p>

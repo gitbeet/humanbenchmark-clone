@@ -1,6 +1,5 @@
 export const reactionTimeIcon = (
   <svg
-    className="p-6"
     width="100"
     height="100"
     viewBox="0 0 100 128"
@@ -17,7 +16,6 @@ export const reactionTimeIcon = (
 
 export const sequenceMemoryIcon = (
   <svg
-    className="p-6"
     width="128"
     height="100"
     viewBox="0 0 128 128"
@@ -39,7 +37,6 @@ export const sequenceMemoryIcon = (
 
 export const aimTrainerIcon = (
   <svg
-    className="p-6"
     width="128"
     height="100"
     viewBox="0 0 128 128"
@@ -70,7 +67,6 @@ export const aimTrainerIcon = (
 
 export const numberMemoryIcon = (
   <svg
-    className="p-6"
     width="128"
     height="100"
     viewBox="0 0 128 128"
@@ -89,7 +85,6 @@ export const numberMemoryIcon = (
 
 export const verbalMemoryIcon = (
   <svg
-    className="p-6"
     width="100"
     height="100"
     viewBox="0 0 100 131"
@@ -116,7 +111,6 @@ export const verbalMemoryIcon = (
 
 export const chimpTestIcon = (
   <svg
-    className="p-6"
     width="128"
     height="100"
     viewBox="0 0 128 128"
@@ -138,7 +132,6 @@ export const chimpTestIcon = (
 
 export const visualMemoryIcon = (
   <svg
-    className="p-6"
     width="128"
     height="100"
     viewBox="0 0 128 128"
@@ -228,6 +221,42 @@ export const heartIcon = (
     <path
       fill="currentColor"
       d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"
+    ></path>
+  </svg>
+);
+
+export const playButtonIcon = (
+  <svg
+    className="w-4 h-4"
+    aria-hidden="true"
+    focusable="false"
+    data-prefix="fas"
+    data-icon="play-circle"
+    role="img"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+  >
+    <path
+      fill="currentColor"
+      d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm115.7 272l-176 101c-15.8 8.8-35.7-2.5-35.7-21V152c0-18.4 19.8-29.8 35.7-21l176 107c16.4 9.2 16.4 32.9 0 42z"
+    ></path>
+  </svg>
+);
+
+export const statsIcon = (
+  <svg
+    className="w-4 h-4"
+    aria-hidden="true"
+    focusable="false"
+    data-prefix="fas"
+    data-icon="chart-line"
+    role="img"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+  >
+    <path
+      fill="currentColor"
+      d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z"
     ></path>
   </svg>
 );
