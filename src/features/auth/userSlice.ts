@@ -25,6 +25,7 @@ interface RegisterUserDataInterface {
   email: string;
   password: string;
   confirmPassword: string;
+  username: string;
 }
 
 interface InitialStateInterface {
@@ -73,7 +74,7 @@ export const login = createAsyncThunk(
 export const register = createAsyncThunk(
   "user/register",
   async (
-    { email, password, confirmPassword }: RegisterUserDataInterface,
+    { email, password, confirmPassword, username }: RegisterUserDataInterface,
     thunkAPI
   ) => {
     if (password !== confirmPassword) {
@@ -84,6 +85,8 @@ export const register = createAsyncThunk(
     }
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      if (!auth.currentUser) return;
+      await updateProfile(auth.currentUser, { displayName: username });
       if (auth.currentUser) {
         return await setDoc(
           doc(db, "users", auth.currentUser.uid),

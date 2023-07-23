@@ -4,10 +4,12 @@ import Button from "./Button";
 
 import { useAppDispatch, useAppSelector } from "../utilities/hooks";
 import { register, reset, logout } from "../features/auth/userSlice";
+import InputField from "./InputField";
 
 export default function Register() {
   const initialValues = {
     email: "",
+    username: "",
     password: "",
     confirmPassword: "",
   };
@@ -19,6 +21,7 @@ export default function Register() {
 
   const [userData, setUserData] = useState({
     email: "",
+    username: "",
     password: "",
     confirmPassword: "",
   });
@@ -38,6 +41,7 @@ export default function Register() {
     setUserData((prev) => {
       return { ...prev, [name]: value };
     });
+    console.log(userData);
   }
 
   useEffect(() => {
@@ -55,6 +59,7 @@ export default function Register() {
         email: userData.email,
         password: userData.password,
         confirmPassword: userData.confirmPassword,
+        username: userData.username,
       })
     );
   }
@@ -71,91 +76,54 @@ export default function Register() {
   }
 
   return (
-    <div className="pt-12">
-      <h1 className="text-2xl text-center text-primary-200 font-semibold ">
-        Register
-      </h1>
-      <h1>{message}</h1>
-      <div className="flex flex-col px-10 space-y-12 pt-12">
-        <div className="flex flex-col">
-          {/* <label className="text-neutral-200 " htmlFor="email">
-            Email
-          </label> */}
-          <input
-            className="border-b border-neutral-500 rounded-sm p-2 focus:border-primary-600"
-            id="email"
-            name="email"
-            // type="email"
-            placeholder="Email"
-            onChange={handleChange}
-          />
-          <h1
-            className={
-              errorMessage.email ? "text-danger-500 text-right" : "opacity-0"
-            }
-          >
-            {errorMessage.email}
-          </h1>
-        </div>
-        <div className="flex flex-col">
-          {/* <label className="text-neutral-200 " htmlFor="password">
-            Password
-          </label> */}
-          <input
-            className={
-              errorMessage.password
-                ? "border-b rounded-sm p-2 text-danger-500 border-danger-500 focus:border-danger-600 placeholder:text-danger-500"
-                : "border-b border-neutral-500 rounded-sm p-2 focus:border-primary-600"
-            }
-            // type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-          />
-          <h1
-            className={
-              errorMessage.password ? "text-danger-500 text-right" : "opacity-0"
-            }
-          >
-            {errorMessage.password}
-          </h1>
-        </div>
-        <div className="flex flex-col">
-          {/* <label className="text-neutral-200 " htmlFor="password">
-            Password
-          </label> */}
-          <input
-            className="border-b border-neutral-500 rounded-sm p-2 focus:border-primary-600"
-            // type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm password"
-            onChange={handleChange}
-          />
-          <h1
-            className={
-              errorMessage.confirmPassword
-                ? "text-danger-500 text-right"
-                : "opacity-0"
-            }
-          >
-            {errorMessage.confirmPassword}
-          </h1>
-        </div>
-        <div className="pt-12">
-          <Button text="Register" onClick={handleSubmit} />
-          <Button text="Reset" onClick={() => dispatch(reset)} />
-        </div>
-        <div className="flex justify-center space-x-2 text-center pt-2 ">
-          <p>Already a client?</p>
+    <div className=" p-12 container-menu">
+      <div className="space-y-4">
+        <h1 className="text-5xl text-center text-primary-200 font-semibold ">
+          Sign up
+        </h1>
+        <div className="flex justify-center space-x-2 text-center text-lg ">
+          <p>Already have an account?</p>
           <Link to="/login">
-            <span className="text-secondary-500 font-semibold cursor-pointer">
-              Log In!
+            <span className="text-secondary-500 font-semibold cursor-pointer text-light-blue">
+              Log in
             </span>
           </Link>
         </div>
-        h1
+      </div>
+      {message && <h1 className=" text-center">{message}</h1>}
+
+      <div className="flex flex-col px-10 space-y-2 pt-12 w-[min(550px,90%)] mx-auto">
+        <InputField
+          label="Email"
+          id="email"
+          name="email"
+          value={userData.email}
+          onChange={handleChange}
+        />
+        <InputField
+          label="Username"
+          id="username"
+          name="username"
+          value={userData.username}
+          onChange={handleChange}
+        />
+        <InputField
+          label="Password"
+          id="password"
+          name="password"
+          value={userData.password}
+          onChange={handleChange}
+        />
+        <InputField
+          label="Password confirmation"
+          id="confirmPassword"
+          name="confirmPassword"
+          value={userData.confirmPassword}
+          onChange={handleChange}
+        />
+        <div className="pt-4">
+          <Button text="Sign up" onClick={handleSubmit} width="full" />
+        </div>
       </div>
     </div>
   );

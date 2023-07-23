@@ -16,6 +16,7 @@ module.exports = {
     colors: {
       white: "#ffffff",
       "neutral-100": "#e6e8f4",
+      "neutral-200": "hsl(250,10%,70%)",
       "neutral-900": "#333333",
       "neutral-blue": "#94c2e7",
       "light-blue": "#4dadfa",

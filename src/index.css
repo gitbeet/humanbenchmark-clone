@@ -6,6 +6,14 @@
   @apply w-[min(100%,1024px)];
 }
 
+.container-menu {
+  @apply md:mx-auto md:w-[min(90%,970px)] mt-8 bg-white rounded-md md:shadow-md;
+}
+
+.container-transparent {
+  @apply md:mx-auto md:w-[min(90%,970px)] mt-8;
+}
+
 .container-mine {
   @apply w-full flex justify-center items-center;
 }

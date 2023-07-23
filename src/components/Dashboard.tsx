@@ -49,7 +49,7 @@ const Dashboard = () => {
   const { results } = useAppSelector((state) => state.results);
   const { user } = useAppSelector((state) => state.user);
   return (
-    <div className="bg-neutral-100 w-full min-h-[100dvh] p-8">
+    <div className="bg-neutral-100 container-transparent min-h-[100dvh]">
       <div className="flex gap-6">
         <div className="bg-white flex flex-col items-center rounded-md py-4">
           {Object.entries(iconsData).map((icon: [string, JSX.Element]) => (
@@ -64,7 +64,11 @@ const Dashboard = () => {
             <div className="">
               <p className="text-xl opacity-50">Username</p>
               <p className="text-4xl font-bold">
-                {user ? user.email : "Guest user"}
+                {user && user.displayName
+                  ? user.displayName
+                  : user && user.email
+                  ? user.email
+                  : "Guest user"}
               </p>
             </div>
             <div>

@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../utilities/hooks";
 import { login, reset, logout } from "../features/auth/userSlice";
+import InputField from "./InputField";
 
 const Login = (): JSX.Element => {
   const { isError, isLoading, isSuccess, message, user } = useAppSelector(
@@ -43,50 +44,39 @@ const Login = (): JSX.Element => {
     );
   }
   return (
-    <div className="pt-16 pb-32">
-      <h1 className="text-3xl text-center text-primary-200 font-semibold ">
-        Login
-      </h1>
-      <div className="flex flex-col px-10 space-y-12 pt-16">
-        {message && <h1 className="text-danger-500 text-center">{message}</h1>}
-        <div className="flex flex-col">
-          {/* <label className="text-neutral-200 " htmlFor="email">
-            Email
-          </label> */}
-          <input
-            className="border-b border-neutral-500 rounded-sm p-2 focus:border-primary-600"
-            id="email"
-            name="email"
-            // type="email"
-            placeholder="Email"
-            onChange={handleChange}
-          />
+    <div className="p-12 container-menu">
+      <div className="space-y-4">
+        <h1 className="text-5xl text-center text-primary-200 font-semibold ">
+          Log in
+        </h1>
+        <div className="flex justify-center space-x-2 text-center text-lg ">
+          <p>Need an account?</p>
+          <Link to="/register">
+            <span className="text-secondary-500 font-semibold cursor-pointer text-light-blue">
+              Sign up
+            </span>
+          </Link>
         </div>
-        <div className="flex flex-col">
-          {/* <label className="text-neutral-200 " htmlFor="password">
-            Password
-          </label> */}
-          <input
-            className="border-b border-neutral-500 rounded-sm p-2 focus:border-primary-600"
-            // type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="space-y-2">
-          <div className="pt-12">
-            <Button text="Login" onClick={handleSubmit} />
-          </div>
-          <div className="flex justify-center space-x-2 text-center pt-2 text-neutral-400 ">
-            <p>Not a client yet?</p>
-            <Link to="/register">
-              <span className="text-secondary-600 hover-hover:hover:text-secondary-500 font-semibold cursor-pointer transition-all">
-                Sign Up!
-              </span>
-            </Link>
-          </div>
+      </div>
+      <div className="flex flex-col px-10 space-y-2 pt-12 w-[min(550px,90%)] mx-auto">
+        {message && <h1 className=" text-center">{message}</h1>}
+        <InputField
+          id="email"
+          label="Email"
+          name="email"
+          onChange={handleChange}
+          value={userData.email}
+          type="email"
+        />
+        <InputField
+          id="password"
+          label="Password"
+          name="password"
+          onChange={handleChange}
+          value={userData.password}
+        />
+        <div className="pt-4">
+          <Button text="Log in" onClick={handleSubmit} width="full" />
         </div>
       </div>
     </div>
