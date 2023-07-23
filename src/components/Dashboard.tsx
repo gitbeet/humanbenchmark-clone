@@ -53,7 +53,7 @@ const Dashboard = () => {
       <div className="flex gap-6">
         <div className="bg-white flex flex-col items-center rounded-md py-4">
           {Object.entries(iconsData).map((icon: [string, JSX.Element]) => (
-            <div className="text-neutral-blue  hover:text-orange transition-colors duration-100 scale-50">
+            <div className="text-light-blue opacity-50 hover:opacity-100  hover:text-orange transition-[opacity,colors] duration-50 ease-in-out scale-50">
               <Link to={`/test/${icon[0]}`}> {icon[1]}</Link>
             </div>
           ))}

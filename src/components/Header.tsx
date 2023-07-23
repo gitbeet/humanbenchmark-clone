@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../utilities/hooks";
 import { logout, reset } from "../features/auth/userSlice";
+import MobileButton from "./MobileButton";
 const Header = () => {
   const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
@@ -11,7 +12,7 @@ const Header = () => {
   };
   return (
     <div className="container-mine shadow-md bg-white">
-      <div className="py-3 px-8 flex justify-between  text-neutral-900 wrapper">
+      <div className="py-3 px-8 flex justify-between items-center  text-neutral-900 wrapper">
         <div className="flex gap-6">
           <div className="flex  justify-center items-center w-fit gap-1">
             <svg
@@ -32,11 +33,15 @@ const Header = () => {
               <p className="font-semibold text-lg">HUMAN BENCHMARK</p>
             </Link>
           </div>
-          <Link to="/dashboard">
-            <p className="font-semibold text-lg">DASHBOARD</p>
+          <Link
+            className="font-semibold text-lg hidden md:block"
+            to="/dashboard"
+          >
+            <p>DASHBOARD</p>
           </Link>
         </div>
-        <div className="flex gap-6">
+        <MobileButton />
+        <div className="hidden md:flex gap-6">
           {!user ? (
             <>
               <Link to="/register">

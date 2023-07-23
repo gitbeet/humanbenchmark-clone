@@ -104,14 +104,14 @@ interface Props {
 }
 const GameGrid = ({ setCurrentGame }: Props) => {
   return (
-    <div className="container-mine">
-      <div className="md:grid space-y-6 md:space-y-0 grid-cols-6  gap-6 w-[min(100%,1000px)] p-12 wrapper">
+    <div className="">
+      <div className="md:grid space-y-6 md:space-y-0 grid-cols-6  gap-6 w-[min(100%,1000px)] container-transparent">
         {gridItems.map((item, index) => (
           <Link
             to={`/test/${item.gameId.toLowerCase()}`}
             key={index}
             onClick={() => setCurrentGame(item.gameId)}
-            className={`group relative rounded-md  bg-white w-full flex flex-col justify-start items-center gap-6 py-8 px-8 cursor-pointer hover:-translate-y-3 shadow-md hover:shadow-lg transition-position duration-300 ease-in-out ${
+            className={`group relative rounded-md  bg-white w-full flex flex-col justify-start items-center gap-6 py-8 px-8 cursor-pointer hover:-translate-y-3 hover:shadow-lg md:shadow-md md:hover:shadow-lg transition-position duration-300 ease-in-out ${
               item.gameId === "visualMemory" || item.gameId === "typing"
                 ? "col-span-3"
                 : "col-span-2"

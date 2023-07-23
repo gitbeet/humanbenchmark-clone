@@ -1,6 +1,6 @@
 export const gameDescriptions = {
   reactiontime: (
-    <p>
+    <>
       This is a simple tool to measure your reaction time.
       <br />
       <br />
@@ -29,20 +29,20 @@ export const gameDescriptions = {
       <br />
       If you want, you can keep track of your scores, and see your full history
       of reaction times. Just perform at least 5 clicks and then save.
-    </p>
+    </>
   ),
   sequencememory: (
-    <p>
+    <>
       Memorize the sequence of buttons that light up, then press them in order.
       <br />
       <br />
       Every time you finish the pattern, it gets longer.
       <br />
       <br /> Make a mistake, and the test is over.
-    </p>
+    </>
   ),
   aimtrainer: (
-    <p>
+    <>
       Click the targets as quickly and accurately as you can.
       <br />
       <br />
@@ -59,10 +59,10 @@ export const gameDescriptions = {
       <br />
       This test is best taken with a mouse or tablet screen. Trackpads are
       difficult to score well with.
-    </p>
+    </>
   ),
   numbermemory: (
-    <p>
+    <>
       The average person can only remember 7 digit numbers reliably, but it's
       possible to do much better using mnemonic techniques. Some helpful links
       are provided below.
@@ -78,10 +78,10 @@ export const gameDescriptions = {
       <br />
       <br />
       <span className="text-light-blue">Mnemonic devices</span>
-    </p>
+    </>
   ),
   verbalmemory: (
-    <p>
+    <>
       This test measures how many words you can keep in short term memory at
       once.
       <br />
@@ -94,10 +94,10 @@ export const gameDescriptions = {
       <br />
       <br />
       Your score is how many turns you lasted.
-    </p>
+    </>
   ),
   chimptest: (
-    <p>
+    <>
       This is a test of working memory, made famous by a study that found that
       chimpanzees consistently outperform humans on this task.
       <br />
@@ -113,10 +113,10 @@ export const gameDescriptions = {
       <br />
       <br />
       <span className="text-light-blue">Youtube: Chimp vs Human!</span>
-    </p>
+    </>
   ),
   visualmemory: (
-    <p>
+    <>
       Every level, a number of tiles will flash white. Memorize them, and pick
       them again after the tiles are reset!
       <br />
@@ -131,10 +131,10 @@ export const gameDescriptions = {
       <br />
       <br />
       Make it as far as you can!
-    </p>
+    </>
   ),
   typing: (
-    <p>
+    <>
       This is a simple test of typing speed, measuring words per minute, or WPM.
       <br />
       <br />
@@ -143,6 +143,6 @@ export const gameDescriptions = {
       <br />
       <br />
       The recorded score is WPM * Accuracy.
-    </p>
+    </>
   ),
 };

@@ -36,7 +36,7 @@ const GameScreen = () => {
   return (
     <div className="flex flex-col gap-16">
       {displayedGame}
-      <div className="flex w-[min(1200px,80%)] mx-auto justify-between gap-8 ">
+      <div className=" mx-auto container-transparent md:flex md:justify-between gap-8 ">
         <h2 className="w-full bg-white flex justify-center items-center rounded-md">
           stats
         </h2>

@@ -43,7 +43,7 @@ function App() {
       <ReactionTime />
     );
   return (
-    <div className="flex flex-col space-y-8 min-w-[100dvw] min-h-[100dvh]  bg-neutral-100">
+    <div className="flex flex-col space-y-8 min-w-[100dvw] min-h-[100dvh]  md:bg-neutral-100">
       <div>{<HomeScreenGame />}</div>
       <GameGrid setCurrentGame={setCurrentGame} />
     </div>

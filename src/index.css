@@ -11,7 +11,7 @@
 }
 
 .container-transparent {
-  @apply md:mx-auto md:w-[min(90%,970px)] mt-8;
+  @apply px-6 md:px-0 md:mx-auto md:w-[min(90%,970px)] mt-8;
 }
 
 .container-mine {
@@ -36,15 +36,16 @@
   animation: time-left 2s linear forwards;
 }
 
-.animation-flash-white {
-}
-
 .animation-flash-red {
   animation: flash-red 1.4s forwards;
 }
 
 .animation-flash-white {
   animation: flash-white 1.4s forwards;
+}
+
+input {
+  @apply outline-none focus:border-2 focus:border-light-blue;
 }
 
 @keyframes flash-red {
