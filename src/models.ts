@@ -8,3 +8,8 @@ export interface GameResultInterface {
   chimpTest: number[];
   visualMemory: number[];
 }
+
+export interface ResultData {
+  game: string;
+  result: number;
+}

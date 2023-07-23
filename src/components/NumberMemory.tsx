@@ -192,15 +192,16 @@ const NumberMemory = () => {
                         ? dispatch(
                             updateResults({
                               game: "numberMemory",
-                              result: level || 0,
+                              result: level || 1,
                             })
                           )
                         : dispatch(
                             updateResultsLocalStorage({
                               game: "numberMemory",
-                              result: level || 0,
+                              result: level || 1,
                             })
                           );
+
                       navigate("/dashboard");
                     }}
                   />

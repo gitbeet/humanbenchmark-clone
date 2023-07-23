@@ -5,9 +5,9 @@ import { useOnSnapshot } from "../features/results/useOnSnapshot";
 import { useStoreResults } from "../features/results/useStoreResults";
 
 const Layout = () => {
+  useStoreResults();
   useUserStatus();
   useOnSnapshot();
-  useStoreResults();
   return (
     <>
       <Header />

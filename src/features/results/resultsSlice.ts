@@ -6,27 +6,28 @@ import {
 } from "@reduxjs/toolkit";
 import { GameResultInterface } from "../../models";
 import { db } from "../../../firebase/config";
-import {
-  doc,
-  setDoc,
-  getDoc,
-  updateDoc,
-  arrayUnion,
-  DocumentReference,
-} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { auth } from "../../../firebase/config";
 import { RootState } from "../../utilities/store";
+import { ResultData } from "../../models";
+const JSONlocalstorageResults = localStorage.getItem("humanbenchmarkResults");
+let localstorageResults = null;
+if (JSONlocalstorageResults !== null) {
+  localstorageResults = JSON.parse(JSONlocalstorageResults);
+}
 
-export const initialResults: GameResultInterface = {
-  typing: [],
-  reactionTime: [],
-  sequenceMemory: [],
-  aimTrainer: [],
-  numberMemory: [],
-  verbalMemory: [],
-  chimpTest: [],
-  visualMemory: [],
-};
+export const initialResults: GameResultInterface = localstorageResults
+  ? localstorageResults
+  : {
+      typing: [],
+      reactionTime: [],
+      sequenceMemory: [],
+      aimTrainer: [],
+      numberMemory: [],
+      verbalMemory: [],
+      chimpTest: [],
+      visualMemory: [],
+    };
 
 interface InitialStateInterface {
   results: GameResultInterface | null;
@@ -35,18 +36,13 @@ interface InitialStateInterface {
   isError: boolean;
   isSuccess: boolean;
 }
-const initialState = {
+const initialState: InitialStateInterface = {
   results: initialResults,
   message: "",
   isLoading: false,
-  isSuccess: true,
+  isSuccess: false,
   isError: false,
 };
-
-interface ResultData {
-  game: string;
-  result: number;
-}
 
 export const updateResults = createAsyncThunk(
   "results/update",
@@ -85,7 +81,8 @@ const results = createSlice({
       // const updatedResults = { ...state }.results;
       // updatedResults[game as keyof GameResultInterface].push(result);
       // state.results = updatedResults;
-      state.results[game as keyof GameResultInterface].push(result);
+      if (state.results !== null)
+        state.results[game as keyof GameResultInterface].push(result);
       console.log(current(state.results));
     },
   },

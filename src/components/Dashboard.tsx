@@ -1,7 +1,5 @@
-import { initialResults } from "../features/results/resultsSlice";
 import { Link } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../utilities/hooks";
-import { updateResults } from "../features/results/resultsSlice";
+import { useAppSelector } from "../utilities/hooks";
 import {
   aimTrainerIcon,
   chimpTestIcon,
@@ -26,7 +24,6 @@ const icons = [
 const Dashboard = () => {
   const { results } = useAppSelector((state) => state.results);
   const { user } = useAppSelector((state) => state.user);
-  // const results: any = user ? userResults : initialResults;
   return (
     <div className="bg-neutral-100 w-full min-h-[100dvh] p-8">
       <div className="flex gap-6">
@@ -71,8 +68,8 @@ const Dashboard = () => {
                   <th>Score</th>
                   <th>Percentile</th>
                 </tr>
-                {Object.entries(results)
-                  // .sort((a: string, b: string) => a[0] > b[0])
+                {Object.entries(results || {})
+                  // .sort((a, b) => a[0] > b[0])
                   .map((res: any, index) => (
                     <tr key={index}>
                       <td className=" text-center">{res[0]}</td>
@@ -82,8 +79,7 @@ const Dashboard = () => {
                           res[1].reduce(
                             (acc: number, x: number) => acc + x,
                             0
-                          ) /
-                          (res[1].length | 1)
+                          ) / (res[1].length || 1)
                         ).toFixed(1)}
                       </td>
                       <td className=" text-center">percentile</td>
