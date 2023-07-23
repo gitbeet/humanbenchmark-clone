@@ -1,11 +1,17 @@
-import React from "react";
-import { reactionTimeIcon } from "../assets/icons";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { useAppSelector, useAppDispatch } from "../utilities/hooks";
+import { logout, reset } from "../features/auth/userSlice";
 const Header = () => {
-  const { user, signout } = useAuth();
+  const { user } = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+  const func = () => {
+    console.log("clicked");
+    dispatch(reset());
+    dispatch(logout());
+  };
   return (
     <div className="container-mine shadow-lg">
+      <h1>{user?.email}</h1>
       <div className="py-3 px-8 flex justify-between  text-neutral-900 wrapper">
         <div className="flex gap-6">
           <div className="flex  justify-center items-center w-fit gap-1">
@@ -42,10 +48,7 @@ const Header = () => {
               </Link>
             </>
           ) : (
-            <p
-              onClick={signout}
-              className="font-semibold text-lg cursor-pointer"
-            >
+            <p onClick={func} className="font-semibold text-lg cursor-pointer">
               LOGOUT
             </p>
           )}

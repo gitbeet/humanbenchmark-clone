@@ -2,6 +2,12 @@ import { useEffect, useState } from "react";
 import WelcomeScreen from "./WelcomeScreen";
 import { numberMemoryIcon } from "../assets/icons";
 import Button from "./Button";
+import {
+  updateResults,
+  updateResultsLocalStorage,
+} from "../features/results/resultsSlice";
+import { useAppDispatch, useAppSelector } from "../utilities/hooks";
+import { useNavigate } from "react-router-dom";
 const generateNumber = (level: number) => {
   let num = "";
   for (var i = 0; i < level; i++) {
@@ -11,6 +17,9 @@ const generateNumber = (level: number) => {
 };
 
 const NumberMemory = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.user);
   const [gameStarted, setGameStarted] = useState(false);
   const [level, setLevel] = useState<number | null>(null);
   const [number, setNumber] = useState(generateNumber(1));
@@ -178,7 +187,22 @@ const NumberMemory = () => {
                     text="Save Score"
                     color="yellow"
                     type="button"
-                    onClick={() => {}}
+                    onClick={() => {
+                      user
+                        ? dispatch(
+                            updateResults({
+                              game: "numberMemory",
+                              result: level || 0,
+                            })
+                          )
+                        : dispatch(
+                            updateResultsLocalStorage({
+                              game: "numberMemory",
+                              result: level || 0,
+                            })
+                          );
+                      navigate("/dashboard");
+                    }}
                   />
                   <Button
                     text="Try Again"

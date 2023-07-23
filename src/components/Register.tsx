@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import Button from "./Button";
+
+import { useAppDispatch, useAppSelector } from "../utilities/hooks";
+import { register, reset, logout } from "../features/auth/userSlice";
 
 export default function Register() {
   const initialValues = {
@@ -11,23 +11,11 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   };
-
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email("Invalid email format")
-      .required("Can't be empty"),
-    password: Yup.string().required("Can't be empty"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), ""], "Passwords do not match")
-      .required("Can't be empty"),
-  });
-
-  const onSubmit = (values: any) => {
-    console.log(values);
-  };
-
+  const { user, isError, isLoading, isSuccess, message } = useAppSelector(
+    (state) => state.user
+  );
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { register, user, signout } = useAuth();
 
   const [userData, setUserData] = useState({
     email: "",
@@ -42,6 +30,7 @@ export default function Register() {
   });
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    dispatch(reset);
     const { name, value } = e.target;
     setErrorMessage((prev) => {
       return { ...prev, [name]: "" };
@@ -51,66 +40,42 @@ export default function Register() {
     });
   }
 
-  async function handleSubmit() {
-    setErrorMessage(initialValues);
-    if (userData.password !== userData.confirmPassword) {
-      setErrorMessage((prev) => {
-        return { ...prev, password: "Passwords do not match" };
-      });
-    }
-    try {
-      await register(userData.email, userData.password);
-      navigate("/successful");
-    } catch (error: any) {
-      if (error.code === "auth/invalid-email") {
-        console.log(error.code);
-        setErrorMessage((prev) => {
-          return { ...prev, email: "Invalid email" };
-        });
-      }
-      if (error.code === "auth/weak-password") {
-        console.log(error.code);
-        setErrorMessage((prev) => {
-          return { ...prev, password: "Weak password" };
-        });
-      }
-      if (error.code === "auth/email-already-in-use") {
-        console.log(error.code);
-        setErrorMessage((prev) => {
-          return { ...prev, email: "Email already in use" };
-        });
-      }
-    }
+  useEffect(() => {
+    dispatch(reset);
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess && user) navigate("/successful");
+  }, [isSuccess, user]);
+
+  function handleSubmit() {
+    dispatch(reset);
+    dispatch(
+      register({
+        email: userData.email,
+        password: userData.password,
+        confirmPassword: userData.confirmPassword,
+      })
+    );
   }
+
+  useEffect(() => {}, [isSuccess]);
 
   if (user) {
     return (
       <div>
         <h1>You are already logged in as {user.email}</h1>
-        <button onClick={signout}>Logout</button>
+        <button onClick={() => dispatch(logout)}>Logout</button>
       </div>
     );
   }
-
-  // return (
-  //   <>
-  //     <Formik
-  //       initialValues={initialValues}
-  //       validationSchema={validationSchema}
-  //       onSubmit={onSubmit}
-  //     >
-  //       {(formik) => {
-  //         return <Form></Form>;
-  //       }}
-  //     </Formik>
-  //   </>
-  // );
 
   return (
     <div className="pt-12">
       <h1 className="text-2xl text-center text-primary-200 font-semibold ">
         Register
       </h1>
+      <h1>{message}</h1>
       <div className="flex flex-col px-10 space-y-12 pt-12">
         <div className="flex flex-col">
           {/* <label className="text-neutral-200 " htmlFor="email">
@@ -163,8 +128,8 @@ export default function Register() {
           <input
             className="border-b border-neutral-500 rounded-sm p-2 focus:border-primary-600"
             // type="password"
-            id="password"
-            name="repeatPassword"
+            id="confirmPassword"
+            name="confirmPassword"
             placeholder="Confirm password"
             onChange={handleChange}
           />
@@ -180,6 +145,7 @@ export default function Register() {
         </div>
         <div className="pt-12">
           <Button text="Register" onClick={handleSubmit} />
+          <Button text="Reset" onClick={() => dispatch(reset)} />
         </div>
         <div className="flex justify-center space-x-2 text-center pt-2 ">
           <p>Already a client?</p>
@@ -189,6 +155,7 @@ export default function Register() {
             </span>
           </Link>
         </div>
+        h1
       </div>
     </div>
   );

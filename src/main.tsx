@@ -8,11 +8,13 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Successful from "./components/Successful";
 import Dashboard from "./components/Dashboard";
-import AuthProvider from "./context/AuthContext";
+import { Provider } from "react-redux";
+import store from "../src/utilities/store";
+import { useUserStatus } from "./features/auth/userAuthStatus";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <AuthProvider>
+    <Provider store={store}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -24,6 +26,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           </Route>
         </Routes>
       </BrowserRouter>
-    </AuthProvider>
+    </Provider>
   </React.StrictMode>
 );
