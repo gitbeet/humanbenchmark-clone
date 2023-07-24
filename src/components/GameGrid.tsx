@@ -78,7 +78,7 @@ const gridItems: gridItemsInterface[] = [
     gameId: "visualMemory",
   },
   {
-    title: "Typing",
+    title: "Typing(not finished)",
     description: "How many words per minute can you type?",
     icon: typingIcon,
     newGame: false,
