@@ -14,7 +14,7 @@ import {
 } from "../assets/icons";
 import IconLink from "./IconLink";
 
-// TODO : - 1 object instead of 2
+// TODO : - 1 interface with name icon and everything we need
 interface IconsDataInterface {
   [key: string]: JSX.Element;
 }
@@ -24,14 +24,14 @@ interface NamesDataInterface {
 }
 
 const namesData: NamesDataInterface = {
-  aimTrainer: "Aim Trainer",
-  chimpTest: "Chimp Test",
-  numberMemory: "Number Memory",
-  reactionTime: "Reaction Time",
-  sequenceMemory: "Sequence Memory",
-  typing: "Typing",
-  verbalMemory: "Verbal Memory",
-  visualMemory: "Visual Memory",
+  aimtrainer: "Aim Trainer",
+  chimptest: "Chimp Test",
+  numbermemory: "Number Memory",
+  reactiontime: "Reaction Time",
+  sequencememory: "Sequence Memory",
+  typing: "Typing(not finished)",
+  verbalmemory: "Verbal Memory",
+  visualmemory: "Visual Memory",
 };
 
 const iconsData: IconsDataInterface = {

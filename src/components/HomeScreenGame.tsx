@@ -1,4 +1,3 @@
-import React from "react";
 import WelcomeScreen from "./WelcomeScreen";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";

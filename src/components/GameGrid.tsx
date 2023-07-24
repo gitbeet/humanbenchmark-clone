@@ -1,4 +1,3 @@
-import React from "react";
 import GameItem from "./GameItem";
 import {
   reactionTimeIcon,
@@ -87,22 +86,7 @@ const gridItems: gridItemsInterface[] = [
   },
 ];
 
-interface Props {
-  setCurrentGame: React.Dispatch<
-    React.SetStateAction<
-      | "typing"
-      | "reactionTime"
-      | "sequenceMemory"
-      | "aimTrainer"
-      | "numberMemory"
-      | "verbalMemory"
-      | "chimpTest"
-      | "visualMemory"
-      | null
-    >
-  >;
-}
-const GameGrid = ({ setCurrentGame }: Props) => {
+const GameGrid = () => {
   return (
     <div className="">
       <div className="md:grid space-y-6 md:space-y-0 grid-cols-6  gap-6 w-[min(100%,1000px)] container-transparent">
@@ -110,7 +94,6 @@ const GameGrid = ({ setCurrentGame }: Props) => {
           <Link
             to={`/test/${item.gameId.toLowerCase()}`}
             key={index}
-            onClick={() => setCurrentGame(item.gameId)}
             className={`group relative rounded-md  bg-white w-full flex flex-col justify-start items-center gap-6 py-8 px-8 cursor-pointer hover:-translate-y-3 hover:shadow-lg md:shadow-md md:hover:shadow-lg transition-position duration-300 ease-in-out ${
               item.gameId === "visualMemory" || item.gameId === "typing"
                 ? "col-span-3"
@@ -119,7 +102,6 @@ const GameGrid = ({ setCurrentGame }: Props) => {
           >
             <GameItem
               key={index}
-              setCurrentGame={setCurrentGame}
               title={item.title}
               description={item.description}
               icon={item.icon}

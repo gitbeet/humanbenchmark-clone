@@ -148,6 +148,7 @@ const SequenceMemory = () => {
         )
       ) : (
         <ResultsScreen
+          resultToSave={sequence.length}
           logo={sequenceMemoryIcon}
           heading="Sequence Memory"
           result={<>Level {sequence.length}</>}

@@ -125,6 +125,7 @@ const ChimpTest = () => {
           ) : (
             <>
               <ResultsScreen
+                resultToSave={blocks}
                 logo={chimpTestIcon}
                 result={blocks.toString()}
                 heading="Score"

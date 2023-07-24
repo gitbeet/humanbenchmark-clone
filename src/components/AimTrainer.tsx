@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import WelcomeScreen from "./WelcomeScreen";
 import { aimTrainerIcon } from "../assets/icons";
 import ResultsScreen from "./ResultsScreen";
@@ -97,6 +97,9 @@ const AimTrainer = () => {
           ) : (
             <>
               <ResultsScreen
+                resultToSave={Math.floor(
+                  results.reduce((acc, result) => acc + result, 0) / 10
+                )}
                 logo={aimTrainerIcon}
                 result={
                   <>

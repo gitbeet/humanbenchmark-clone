@@ -10,24 +10,31 @@ import { doc, setDoc } from "firebase/firestore";
 import { auth } from "../../../firebase/config";
 import { RootState } from "../../utilities/store";
 import { ResultData } from "../../models";
+import store from "../../utilities/store";
+
+const user = auth.currentUser;
+
 const JSONlocalstorageResults = localStorage.getItem("humanbenchmarkResults");
+
 let localstorageResults = null;
-if (JSONlocalstorageResults !== null) {
+
+if (JSONlocalstorageResults) {
   localstorageResults = JSON.parse(JSONlocalstorageResults);
 }
 
-export const initialResults: GameResultInterface = localstorageResults
-  ? localstorageResults
-  : {
-      typing: [],
-      reactionTime: [],
-      sequenceMemory: [],
-      aimTrainer: [],
-      numberMemory: [],
-      verbalMemory: [],
-      chimpTest: [],
-      visualMemory: [],
-    };
+export const initialResults: GameResultInterface =
+  !user && localstorageResults
+    ? localstorageResults
+    : {
+        typing: [],
+        reactiontime: [],
+        sequencememory: [],
+        aimtrainer: [],
+        numbermemory: [],
+        verbalmemory: [],
+        chimptest: [],
+        visualmemory: [],
+      };
 
 interface InitialStateInterface {
   results: GameResultInterface | null;
@@ -67,23 +74,15 @@ const results = createSlice({
   initialState,
   reducers: {
     setResults: (state, action) => {
-      console.log("setting results");
       state.results = action.payload;
-      console.log(state.results);
     },
     updateResultsLocalStorage: (
       state,
       { payload }: PayloadAction<{ game: string; result: number }>
     ) => {
       const { game, result } = payload;
-      console.log("running updatelocalstorageresults");
-      console.log(game, result);
-      // const updatedResults = { ...state }.results;
-      // updatedResults[game as keyof GameResultInterface].push(result);
-      // state.results = updatedResults;
       if (state.results !== null)
         state.results[game as keyof GameResultInterface].push(result);
-      console.log(current(state.results));
     },
   },
   extraReducers: (builder) => {

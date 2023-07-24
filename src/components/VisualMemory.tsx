@@ -126,6 +126,7 @@ const VisualMemory = () => {
         />
       ) : resultsScreen ? (
         <ResultsScreen
+          resultToSave={level}
           logo={visualMemoryIcon}
           heading="Visual Memory"
           result={<p>Level {level}</p>}

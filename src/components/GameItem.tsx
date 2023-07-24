@@ -1,24 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
 interface Props {
   icon: JSX.Element;
   title: string;
   description: string;
   newGame: boolean;
-  setCurrentGame: React.Dispatch<
-    React.SetStateAction<
-      | "typing"
-      | "reactionTime"
-      | "sequenceMemory"
-      | "aimTrainer"
-      | "numberMemory"
-      | "verbalMemory"
-      | "chimpTest"
-      | "visualMemory"
-      | null
-    >
-  >;
   gameId:
     | "typing"
     | "reactionTime"

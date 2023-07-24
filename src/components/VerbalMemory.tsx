@@ -121,6 +121,7 @@ const VerbalMemory = () => {
         </div>
       ) : (
         <ResultsScreen
+          resultToSave={streak}
           logo={verbalMemoryIcon}
           heading="Verbal Memory"
           result={

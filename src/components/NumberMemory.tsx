@@ -191,13 +191,13 @@ const NumberMemory = () => {
                       user
                         ? dispatch(
                             updateResults({
-                              game: "numberMemory",
+                              game: "numbermemory",
                               result: level || 1,
                             })
                           )
                         : dispatch(
                             updateResultsLocalStorage({
-                              game: "numberMemory",
+                              game: "numbermemory",
                               result: level || 1,
                             })
                           );

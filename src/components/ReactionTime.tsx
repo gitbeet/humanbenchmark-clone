@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   reactionTimeIcon,
   clockIcon,
@@ -134,6 +134,9 @@ const ReactionTime = () => {
         </div>
       ) : (
         <ResultsScreen
+          resultToSave={Math.floor(
+            results.reduce((acc, result) => acc + result.time, 0) / 5
+          )}
           onClickSave={() => {}}
           onClickTryAgain={() => {
             setResults([]);
