@@ -28,7 +28,7 @@ const WelcomeScreen = ({
     >
       <div className="animate-pulse w-fit">{logo}</div>
       <div className="space-y-4 flex flex-col items-center">
-        <div className="text-7xl font-normal">{heading}</div>
+        <div className="text-7xl font-normal text-center">{heading}</div>
         {buttonPosition === "above" ? button : null}
 
         <div className="text-2xl font-normal  text-center w-[min(90%,1000px)]">

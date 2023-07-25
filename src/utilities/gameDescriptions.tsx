@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const gameDescriptions = {
   reactiontime: (
     <>
@@ -14,8 +16,10 @@ export const gameDescriptions = {
       <br />
       <br />
       Scores in this test are faster than the{" "}
-      <span className="text-light-blue">aim trainer</span> test, because you can
-      react instantly without moving the cursor.
+      <span className="text-light-blue">
+        <Link to="/test/aimtrainer">aim trainer</Link>
+      </span>{" "}
+      test, because you can react instantly without moving the cursor.
       <br />
       <br />
       This is discussed in further detail on the the{" "}
@@ -24,7 +28,14 @@ export const gameDescriptions = {
       adding 10-50ms on top. Some modern TVs add as much as 150ms!
       <br />
       <br />
-      Other tools:<span className="text-light-blue"> What's My GPU?</span>
+      Other tools:
+      <a
+        className="text-light-blue"
+        target="blank"
+        href="https://hardwaretester.com/gpu"
+      >
+        What's My GPU?
+      </a>
       <br />
       <br />
       If you want, you can keep track of your scores, and see your full history
