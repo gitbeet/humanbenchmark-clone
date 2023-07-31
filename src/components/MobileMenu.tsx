@@ -16,7 +16,7 @@ const MobileMenu = () => {
       <div
         className={`${
           showMobileMenu ? "translate-x-0" : "-translate-x-full"
-        }   fixed z-[1000] w-[300px] h-[100dvh] bg-[rgba(255,255,255,0.7)]  backdrop-blur-sm text-neutral-900 font-semibold   pl-12 p-8 
+        }   fixed z-[1000] w-[300px] h-[100dvh] bg-[rgba(255,255,255,0.9)]  text-neutral-900 font-semibold   pl-12 p-8 
          transition-all duration-[350ms] `}
       >
         <div
@@ -41,9 +41,9 @@ const MobileMenu = () => {
         onClick={() => dispatch(toggleMobileMenu())}
         className={`${
           showMobileMenu
-            ? "opacity-25 pointer-events-auto"
+            ? "opacity-100 pointer-events-auto backdrop-blur-sm"
             : "opacity-0 pointer-events-none"
-        } fixed z-[9] w-screen h-screen top-0 bottom-0 left-0 right-0 bg-neutral-900`}
+        } fixed z-[9] w-screen h-screen top-0 bottom-0 left-0 right-0 bg-[rgba(0,0,0,0.2)]`}
       ></div>
     </>
   );

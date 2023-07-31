@@ -11,11 +11,13 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react-redux": "^7.1.25",
+    "chart.js": "^4.3.2",
     "firebase": "^10.0.0",
     "formik": "^2.4.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
+    "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.1",

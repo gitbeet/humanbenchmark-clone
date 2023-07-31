@@ -15,7 +15,7 @@ const HomeScreenGame = () => {
             onClick={() => navigate("/test/reactiontime")}
           />
         }
-        description="Measure your abilitiesa with brain games andcognitive tests."
+        description="Measure your abilities with brain games and cognitive tests."
         logo={reactionTimeIcon}
         heading="Human Benchmark"
       />

@@ -1,12 +1,12 @@
-import { doc, onSnapshot } from "firebase/firestore";
+import { collection, doc, getDocs, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
 import { db } from "../../../firebase/config";
-import { setResults } from "./resultsSlice";
+import { setResults, setGlobalResults } from "./resultsSlice";
 import { useAppDispatch, useAppSelector } from "../../utilities/hooks";
+import { GlobalResults } from "../../models";
 
 export const useOnSnapshot = () => {
   const dispatch = useAppDispatch();
-  const { results } = useAppSelector((state) => state.results);
   const { user } = useAppSelector((state) => state.user);
   useEffect(() => {
     if (!user) return;
@@ -17,4 +17,23 @@ export const useOnSnapshot = () => {
       dispatch(setResults(results));
     });
   }, [user, dispatch]);
+
+  useEffect(() => {
+    const getGlobalResults = async () => {
+      const result: any[] | GlobalResults[] = [];
+      const globalResultsRef = collection(db, "globalResults");
+      const globalResultsSnapshot = await getDocs(globalResultsRef);
+      globalResultsSnapshot.forEach((doc) =>
+        result.push({ game: doc.id, result: doc.data() })
+      );
+      dispatch(setGlobalResults(result));
+    };
+    getGlobalResults();
+
+    let hourlyInterval = setInterval(getGlobalResults, 300000);
+    return () => {
+      getGlobalResults();
+      clearInterval(hourlyInterval);
+    };
+  }, []);
 };

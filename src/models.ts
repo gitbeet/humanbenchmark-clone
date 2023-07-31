@@ -24,3 +24,12 @@ export interface ResultData {
   game: string;
   result: number;
 }
+
+export interface SingleResult {
+  [key: number]: number;
+}
+
+export interface GlobalResults {
+  game: string;
+  result: SingleResult;
+}

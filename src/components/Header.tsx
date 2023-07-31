@@ -4,7 +4,6 @@ import { logout, reset } from "../features/auth/userSlice";
 import MobileButton from "./MobileButton";
 const Header = () => {
   const { user } = useAppSelector((state) => state.user);
-  const { showMobileMenu } = useAppSelector((state) => state.modals);
   const dispatch = useAppDispatch();
   const func = () => {
     dispatch(reset());

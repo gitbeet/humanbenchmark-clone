@@ -10,6 +10,7 @@ import VisualMemory from "./VisualMemory";
 import GameDescription from "./GameDescription";
 import { gameDescriptions } from "../utilities/gameDescriptions";
 import { GameDescriptionInterface } from "../models";
+import Statistics from "./Statistics";
 const GameScreen = () => {
   const params = useParams();
   const currentGame = params.gameName?.toLowerCase() || "reactiontime";
@@ -37,9 +38,7 @@ const GameScreen = () => {
     <div className="flex flex-col gap-16">
       {displayedGame}
       <div className=" mx-auto container-transparent md:flex md:justify-between gap-8 ">
-        <h2 className="w-full bg-white flex justify-center items-center rounded-md">
-          stats
-        </h2>
+        <Statistics game={currentGame} />
         <GameDescription
           description={
             gameDescriptions[currentGame as keyof GameDescriptionInterface]

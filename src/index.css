@@ -7,7 +7,7 @@
 }
 
 .container-menu {
-  @apply md:mx-auto md:w-[min(90%,970px)] mt-8 bg-white rounded-md md:shadow-md;
+  @apply md:mx-auto md:w-[min(90%,970px)]  bg-white rounded-md md:shadow-md;
 }
 
 .container-transparent {

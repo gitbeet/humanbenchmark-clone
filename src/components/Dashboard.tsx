@@ -13,6 +13,8 @@ import {
   visualMemoryIcon,
 } from "../assets/icons";
 import IconLink from "./IconLink";
+import { calculateTimeElapsed } from "../utilities/timeLapsed";
+import { useEffect, useState } from "react";
 
 // TODO : - 1 interface with name icon and everything we need
 interface IconsDataInterface {
@@ -48,19 +50,24 @@ const iconsData: IconsDataInterface = {
 const Dashboard = () => {
   const { results } = useAppSelector((state) => state.results);
   const { user } = useAppSelector((state) => state.user);
+  const [createdAt, setCreatedAt] = useState("");
+  useEffect(() => {
+    if (!user?.metadata.creationTime) return;
+    setCreatedAt(calculateTimeElapsed(user.metadata.creationTime));
+  }, [user]);
   return (
-    <div className="bg-neutral-100 container-transparent min-h-[100dvh]">
-      <div className="flex gap-6">
-        <div className="bg-white flex flex-col items-center rounded-md py-4">
+    <div className="md:bg-neutral-100 container-transparent min-h-[100dvh]">
+      <div className="flex items-stretch gap-6">
+        <div className="hidden md:flex md:flex-col md:items-center  bg-white  rounded-md py-4">
           {Object.entries(iconsData).map((icon: [string, JSX.Element]) => (
             <div className="text-light-blue opacity-50 hover:opacity-100  hover:text-orange transition-[opacity,colors] duration-50 ease-in-out scale-50">
               <Link to={`/test/${icon[0]}`}> {icon[1]}</Link>
             </div>
           ))}
         </div>
-        <div className="w-full  space-y-6">
+        <div className="w-full space-y-12 md:space-y-6">
           {/* USER INFO SECTION */}
-          <div className="bg-white p-8 rounded-md shadow-md space-y-4">
+          <div className="bg-white md:p-6  container-menu space-y-4">
             <div className="">
               <p className="text-xl opacity-50">Username</p>
               <p className="text-4xl font-bold">
@@ -73,7 +80,7 @@ const Dashboard = () => {
             </div>
             <div>
               <p className="opacity-50 text-xl">Joined</p>
-              <p className="text-xl font-semibold">TODO : 3 hours ago</p>
+              <p className="text-xl font-semibold">{createdAt}</p>
             </div>
             {!user && (
               <p className="text-xl">
@@ -89,14 +96,14 @@ const Dashboard = () => {
             )}
           </div>
           {/* RESULTS SECTION */}
-          <div className="bg-white p-12 rounded-md shadow-md space-y-4">
+          <div className="bg-white md:p-12 container-menu space-y-4">
             <table className="w-full">
               <tbody>
-                <tr className="text-lg">
-                  <th className="pb-8">Test</th>
-                  <th className="pb-8">Actions</th>
-                  <th className="pb-8">Score</th>
-                  <th className="pb-8">Percentile</th>
+                <tr className="text-lg hidden md:table-row">
+                  <th className=" pb-8">Test</th>
+                  <th className=" pb-8">Actions</th>
+                  <th className=" pb-8">Score</th>
+                  <th className=" pb-8">Percentile</th>
                 </tr>
                 {Object.entries(results || {})
                   .sort()
@@ -105,7 +112,7 @@ const Dashboard = () => {
                       <td className="text-center text-lg py-2">
                         {namesData[res[0] as keyof NamesDataInterface]}
                       </td>
-                      <td className=" text-center flex gap-4 justify-center items-center">
+                      <td className=" text-center flex flex-col md:flex-row gap-4 justify-center items-center">
                         <IconLink
                           text="Play"
                           icon={playButtonIcon}

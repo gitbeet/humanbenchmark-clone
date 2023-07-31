@@ -14,7 +14,7 @@ import {
   User,
 } from "firebase/auth";
 import { auth } from "../../../firebase/config";
-import { initialResults } from "../results/resultsSlice";
+import { emptyResults } from "../results/resultsSlice";
 
 interface LoginUserDataInterface {
   email: string;
@@ -90,7 +90,7 @@ export const register = createAsyncThunk(
       if (auth.currentUser) {
         return await setDoc(
           doc(db, "users", auth.currentUser.uid),
-          initialResults
+          emptyResults
         );
       }
     } catch (error: any) {
