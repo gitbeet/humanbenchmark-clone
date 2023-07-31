@@ -66,14 +66,6 @@ const AimTrainer = () => {
                 <span className="opacity-75">Remaining</span>{" "}
                 {11 - results.length}
               </p>
-              {/* <div>
-                {results.map((res) => (
-                  <span className="mr-4">{res}</span>
-                ))}
-              </div>
-              {results.map((res) => (
-                <li>{res}</li>
-              ))} */}
               <div
                 style={{
                   top: `${pos[0] < 40 ? 20 : pos[0] > 80 ? 80 : pos[0]}%`,
@@ -119,24 +111,6 @@ const AimTrainer = () => {
                   setEndTime(null);
                 }}
               />
-              {/* <h1>
-                Average shooting time is{" "}
-                {Math.floor(
-                  results.reduce((acc, result) => acc + result, 0) / 10
-                )}
-                ms
-              </h1>
-              <button
-                onClick={() => {
-                  setResults([]);
-                  setShowResultsScreen(false);
-                  setGameStarted(false);
-                  setStartTime(null);
-                  setEndTime(null);
-                }}
-              >
-                Try again
-              </button> */}
             </>
           )}
         </>

@@ -3,6 +3,7 @@ import WelcomeScreen from "./WelcomeScreen";
 import { numberMemoryIcon } from "../assets/icons";
 import Button from "./Button";
 import {
+  updateGlobalResults,
   updateResults,
   updateResultsLocalStorage,
 } from "../features/results/resultsSlice";
@@ -61,6 +62,28 @@ const NumberMemory = () => {
       return prev !== null ? prev + 1 : 1;
     });
     setShowNumberScreen(true);
+  };
+
+  const handleUpdateRes = () => {
+    if (user) {
+      dispatch(
+        updateResults({
+          game: "numbermemory",
+          result: level || 1,
+        })
+      );
+      dispatch(
+        updateGlobalResults({ game: "numbermemory", result: level || 1 })
+      );
+    } else {
+      dispatch(
+        updateResultsLocalStorage({
+          game: "numbermemory",
+          result: level || 1,
+        })
+      );
+    }
+    navigate("/dashboard");
   };
 
   useEffect(() => {
@@ -187,23 +210,7 @@ const NumberMemory = () => {
                     text="Save Score"
                     color="yellow"
                     type="button"
-                    onClick={() => {
-                      user
-                        ? dispatch(
-                            updateResults({
-                              game: "numbermemory",
-                              result: level || 1,
-                            })
-                          )
-                        : dispatch(
-                            updateResultsLocalStorage({
-                              game: "numbermemory",
-                              result: level || 1,
-                            })
-                          );
-
-                      navigate("/dashboard");
-                    }}
+                    onClick={handleUpdateRes}
                   />
                   <Button
                     text="Try Again"

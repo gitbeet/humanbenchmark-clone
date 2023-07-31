@@ -21,19 +21,24 @@ interface IconsDataInterface {
   [key: string]: JSX.Element;
 }
 
-interface NamesDataInterface {
-  [key: string]: string;
+interface GameInfoInterface {
+  [key: string]: GameInfoElement;
 }
 
-const namesData: NamesDataInterface = {
-  aimtrainer: "Aim Trainer",
-  chimptest: "Chimp Test",
-  numbermemory: "Number Memory",
-  reactiontime: "Reaction Time",
-  sequencememory: "Sequence Memory",
-  typing: "Typing(not finished)",
-  verbalmemory: "Verbal Memory",
-  visualmemory: "Visual Memory",
+interface GameInfoElement {
+  name: string;
+  measurement: string;
+}
+
+const namesData: GameInfoInterface = {
+  aimtrainer: { name: "Aim Trainer", measurement: "ms" },
+  chimptest: { name: "Chimp Test", measurement: "points" },
+  numbermemory: { name: "Number Memory", measurement: "digits" },
+  reactiontime: { name: "Reaction Time", measurement: "ms" },
+  sequencememory: { name: "Sequence Memory", measurement: "points" },
+  typing: { name: "Typing(not finished)", measurement: "WPM" },
+  verbalmemory: { name: "Verbal Memory", measurement: "points" },
+  visualmemory: { name: "Visual Memory", measurement: "points" },
 };
 
 const iconsData: IconsDataInterface = {
@@ -110,7 +115,7 @@ const Dashboard = () => {
                   .map((res: any, index) => (
                     <tr key={index}>
                       <td className="text-center text-lg py-2">
-                        {namesData[res[0] as keyof NamesDataInterface]}
+                        {namesData[res[0]].name}
                       </td>
                       <td className=" text-center flex flex-col md:flex-row gap-4 justify-center items-center">
                         <IconLink
@@ -121,12 +126,16 @@ const Dashboard = () => {
                         <IconLink text="Stats" icon={statsIcon} link={`#`} />
                       </td>
                       <td className="text-center">
-                        {(
-                          res[1].reduce(
-                            (acc: number, x: number) => acc + x,
-                            0
-                          ) / (res[1].length || 1)
-                        ).toFixed(1)}
+                        {/* parseFloat removes insignificant trailing 0s */}
+                        {parseFloat(
+                          (
+                            res[1].reduce(
+                              (acc: number, x: number) => acc + x,
+                              0
+                            ) / (res[1].length || 1)
+                          ).toFixed(1)
+                        )}{" "}
+                        {namesData[res[0]].measurement}
                       </td>
                       <td className=" text-center">percentile</td>
                     </tr>
