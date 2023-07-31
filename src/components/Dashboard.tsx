@@ -15,6 +15,8 @@ import {
 import IconLink from "./IconLink";
 import { calculateTimeElapsed } from "../utilities/timeLapsed";
 import { useEffect, useState } from "react";
+import roundToNearestProduct from "../utilities/roundToNearestProduct";
+import { GlobalResults } from "../models";
 
 // TODO : - 1 interface with name icon and everything we need
 interface IconsDataInterface {
@@ -53,13 +55,17 @@ const iconsData: IconsDataInterface = {
 };
 
 const Dashboard = () => {
-  const { results } = useAppSelector((state) => state.results);
+  const { results, globalResults, isLoading } = useAppSelector(
+    (state) => state.results
+  );
   const { user } = useAppSelector((state) => state.user);
   const [createdAt, setCreatedAt] = useState("");
   useEffect(() => {
     if (!user?.metadata.creationTime) return;
     setCreatedAt(calculateTimeElapsed(user.metadata.creationTime));
   }, [user]);
+
+  if (isLoading || globalResults.length < 1) return <h1>Loading...</h1>;
   return (
     <div className="md:bg-neutral-100 container-transparent min-h-[100dvh]">
       <div className="flex items-stretch gap-6">
@@ -112,34 +118,93 @@ const Dashboard = () => {
                 </tr>
                 {Object.entries(results || {})
                   .sort()
-                  .map((res: any, index) => (
-                    <tr key={index}>
-                      <td className="text-center text-lg py-2">
-                        {namesData[res[0]].name}
-                      </td>
-                      <td className=" text-center flex flex-col md:flex-row gap-4 justify-center items-center">
-                        <IconLink
-                          text="Play"
-                          icon={playButtonIcon}
-                          link={`../test/${res[0].toString().toLowerCase()}`}
-                        />
-                        <IconLink text="Stats" icon={statsIcon} link={`#`} />
-                      </td>
-                      <td className="text-center">
-                        {/* parseFloat removes insignificant trailing 0s */}
-                        {parseFloat(
-                          (
-                            res[1].reduce(
-                              (acc: number, x: number) => acc + x,
-                              0
-                            ) / (res[1].length || 1)
-                          ).toFixed(1)
-                        )}{" "}
-                        {namesData[res[0]].measurement}
-                      </td>
-                      <td className=" text-center">percentile</td>
-                    </tr>
-                  ))}
+                  .map((res: any, index) => {
+                    const result = parseFloat(
+                      // .splice() to get the last 5 results as in the original website
+                      (res[1].length > 5
+                        ? [...res[1]]
+                            .splice(-5)
+                            .reduce((acc: number, x: number) => acc + x, 0) /
+                          (res[1].length || 1)
+                        : res[1].reduce(
+                            (acc: number, x: number) => acc + x,
+                            0
+                          ) / (res[1].length || 1)
+                      ).toFixed(1)
+                    );
+                    const gameLink = `../test/${res[0]
+                      .toString()
+                      .toLowerCase()}`;
+                    const gameName = namesData[res[0]].name;
+                    const gameMeasurement = namesData[res[0]].measurement;
+                    // array with the results for the mapped game
+                    const globalResultsCurrentGame = Object.entries(
+                      globalResults.filter(
+                        (result) => result.game === res[0]
+                      )[0].result
+                    );
+                    // accounting  for the aim and reaction time games modification of the result
+                    const percentileResult =
+                      res[0] === "aimtrainer"
+                        ? roundToNearestProduct(result, 50)
+                        : res[0] === "reactiontime"
+                        ? roundToNearestProduct(result, 25)
+                        : res[0] === "verbalmemory"
+                        ? roundToNearestProduct(result, 10)
+                        : roundToNearestProduct(result, 1);
+                    const totalResults = globalResultsCurrentGame.reduce(
+                      (acc, x) => acc + x[1],
+                      0
+                    );
+                    const sameResultAsMe = globalResultsCurrentGame
+                      .filter((res) => parseInt(res[0]) === percentileResult)
+                      .reduce((acc, x) => acc + x[1], 0);
+
+                    // index of the global  result array where we cut left and right
+                    const resultIndex = globalResultsCurrentGame.findIndex(
+                      (res) => parseInt(res[0]) === percentileResult
+                    );
+                    const rightSide = [...globalResultsCurrentGame]
+                      .splice(resultIndex)
+                      .filter((res) => parseInt(res[0]) !== percentileResult);
+                    const rightSideResultsNumber = rightSide.reduce(
+                      (acc, x) => acc + x[1],
+                      0
+                    );
+                    // display "?" if we haven't played the game yet
+                    let percentile: number | string;
+                    if (res[1].length < 1) {
+                      percentile = "?";
+                    } else {
+                      // we pass half of the results that are same as ours to the left and half to the right
+                      percentile = parseFloat(
+                        (
+                          100 -
+                          ((sameResultAsMe / 2 + rightSideResultsNumber) /
+                            totalResults) *
+                            100
+                        ).toFixed(1)
+                      );
+                    }
+                    return (
+                      <tr key={index}>
+                        <td className="text-center text-lg py-2">{gameName}</td>
+                        <td className=" text-center flex flex-col md:flex-row gap-4 justify-center items-center">
+                          <IconLink
+                            text="Play"
+                            icon={playButtonIcon}
+                            link={gameLink}
+                          />
+                          <IconLink text="Stats" icon={statsIcon} link={`#`} />
+                        </td>
+                        <td className="text-center">
+                          {res[1].length < 1 ? "?" : result}{" "}
+                          {res[1].length < 1 ? "" : gameMeasurement}
+                        </td>
+                        <td className=" text-center">{percentile}</td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>

@@ -10,7 +10,7 @@ import { doc, increment, setDoc, updateDoc } from "firebase/firestore";
 import { auth } from "../../../firebase/config";
 import { RootState } from "../../utilities/store";
 import { ResultData } from "../../models";
-import store from "../../utilities/store";
+import initialGlobalResults from "../../utilities/initialGlobalResults";
 
 export const emptyResults = {
   typing: [],
@@ -57,7 +57,7 @@ interface InitialStateInterface {
 }
 const initialState: InitialStateInterface = {
   results: initialResults,
-  globalResults: [],
+  globalResults: initialGlobalResults,
   message: "",
   isLoading: false,
   isSuccess: false,

@@ -2,8 +2,6 @@ export function calculateTimeElapsed(dateString: string) {
   const startDate = new Date(dateString); // Convert the date string to a Date object
   const endDate = new Date(); // Current date
 
-  console.log(startDate);
-  console.log(endDate);
   // Calculate the time difference in milliseconds
   const timeDifference = endDate.getTime() - startDate.getTime();
 

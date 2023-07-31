@@ -49,6 +49,8 @@ const ResultsScreen = ({
               ? roundToNearestProduct(resultToSave, 25)
               : currentGame === "aimtrainer"
               ? roundToNearestProduct(resultToSave, 50)
+              : currentGame === "verbalmemory"
+              ? roundToNearestProduct(resultToSave, 10)
               : resultToSave,
         })
       );

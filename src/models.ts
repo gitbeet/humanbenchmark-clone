@@ -26,7 +26,7 @@ export interface ResultData {
 }
 
 export interface SingleResult {
-  [key: number]: number;
+  [key: number | string]: number;
 }
 
 export interface GlobalResults {
