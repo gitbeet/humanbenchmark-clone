@@ -78,7 +78,7 @@ const Dashboard = () => {
                   : "Guest user"}
               </p>
             </div>
-            <div>
+            <div className={user ? `block` : "hidden"}>
               <p className="opacity-50 text-xl">Joined</p>
               <p className="text-xl font-semibold">{createdAt}</p>
             </div>
