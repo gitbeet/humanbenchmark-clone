@@ -7,11 +7,11 @@
 }
 
 .container-menu {
-  @apply md:mx-auto md:w-[min(90%,970px)]  bg-white rounded-md md:shadow-md;
+  @apply md:w-[min(90%,970px)]   bg-white rounded-md md:shadow-md;
 }
 
 .container-transparent {
-  @apply px-6 md:px-0 md:mx-auto md:w-[min(90%,970px)] mt-8;
+  @apply md:mx-auto md:w-[min(95%,970px)] mt-8;
 }
 
 .container-mine {

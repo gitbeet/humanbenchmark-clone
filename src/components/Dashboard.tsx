@@ -68,7 +68,7 @@ const Dashboard = () => {
   if (isLoading || globalResults.length < 1) return <h1>Loading...</h1>;
   return (
     <div className="md:bg-neutral-100 container-transparent min-h-[100dvh]">
-      <div className="flex items-stretch gap-6">
+      <div className="flex justify-center items-stretch gap-4 ">
         <div className="hidden md:flex md:flex-col md:items-center  bg-white  rounded-md py-4">
           {Object.entries(iconsData).map((icon: [string, JSX.Element]) => (
             <div className="text-light-blue opacity-50 hover:opacity-100  hover:text-orange transition-[opacity,colors] duration-50 ease-in-out scale-50">
@@ -76,9 +76,9 @@ const Dashboard = () => {
             </div>
           ))}
         </div>
-        <div className="w-full space-y-12 md:space-y-6">
+        <div className="w-full space-y-4 md:space-y-4">
           {/* USER INFO SECTION */}
-          <div className="bg-white md:p-6  container-menu space-y-4">
+          <div className="bg-white md:p-8 space-y-4">
             <div className="">
               <p className="text-xl opacity-50">Username</p>
               <p className="text-4xl font-bold">
@@ -107,14 +107,14 @@ const Dashboard = () => {
             )}
           </div>
           {/* RESULTS SECTION */}
-          <div className="bg-white md:p-12 container-menu space-y-4">
+          <div className="bg-white md:p-8 space-y-4">
             <table className="w-full">
               <tbody>
-                <tr className="text-lg hidden md:table-row">
-                  <th className=" pb-8">Test</th>
-                  <th className=" pb-8">Actions</th>
-                  <th className=" pb-8">Score</th>
-                  <th className=" pb-8">Percentile</th>
+                <tr className="text-xl text-left hidden md:table-row">
+                  <th className="font-normal pb-8">Test</th>
+                  <th className="font-normal pb-8">Actions</th>
+                  <th className="font-normal pb-8">Score</th>
+                  <th className="font-normal pb-8">Percentile</th>
                 </tr>
                 {Object.entries(results || {})
                   .sort()
@@ -186,10 +186,16 @@ const Dashboard = () => {
                         ).toFixed(1)
                       );
                     }
+                    const isEven = index % 2 === 0;
                     return (
-                      <tr key={index}>
-                        <td className="text-center text-lg py-2">{gameName}</td>
-                        <td className=" text-center flex flex-col md:flex-row gap-4 justify-center items-center">
+                      <tr
+                        key={index}
+                        className={`${isEven ? "" : "bg-neutral-50"}`}
+                      >
+                        <td className="px-2 py-3 text-left text-xl font-semibold">
+                          {gameName}
+                        </td>
+                        <td className="md:flex md:flex-row gap-4 justify-center items-center py-3">
                           <IconLink
                             text="Play"
                             icon={playButtonIcon}
@@ -197,11 +203,34 @@ const Dashboard = () => {
                           />
                           <IconLink text="Stats" icon={statsIcon} link={`#`} />
                         </td>
-                        <td className="text-center">
-                          {res[1].length < 1 ? "?" : result}{" "}
-                          {res[1].length < 1 ? "" : gameMeasurement}
+                        <td className="text-left">
+                          <span className="text-3xl font-bold">
+                            {res[1].length < 1 ? "?" : result}{" "}
+                          </span>
+                          <span className="">
+                            {res[1].length < 1 ? "" : gameMeasurement}
+                          </span>
                         </td>
-                        <td className=" text-center">{percentile}</td>
+                        <td className="text-center py-1">
+                          <div className=" bg-neutral-200 text-white w-[full] h-8 rounded-sm">
+                            <div
+                              style={{
+                                width: `${
+                                  typeof percentile === "number"
+                                    ? percentile
+                                    : 0
+                                }%`,
+                              }}
+                              className="bg-blue h-full py-1 "
+                            >
+                              <p className="pl-2">
+                                {typeof percentile === "number"
+                                  ? `${percentile}%`
+                                  : "?"}
+                              </p>
+                            </div>
+                          </div>
+                        </td>
                       </tr>
                     );
                   })}
