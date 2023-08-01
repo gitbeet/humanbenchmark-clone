@@ -8,6 +8,7 @@ import IconLink from "./IconLink";
 import { playButtonIcon } from "../assets/icons";
 import StatsPageGraph from "./StatsPageGraph";
 import NotFound from "./NotFound";
+import StatsPageGraphRecent from "./StatsPageGraphRecent";
 
 const StatsPage = () => {
   const params = useParams();
@@ -85,9 +86,7 @@ const StatsPage = () => {
             />
           </div>
           <StatsPageGraph gameName={path} />
-          <div className="bg-white md:p-8 space-y-4 rounded-md">
-            recent graph
-          </div>
+          <StatsPageGraphRecent gameName={path} />
         </div>
       </div>
     </div>

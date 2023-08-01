@@ -11,7 +11,7 @@ import {
 import { Line } from "react-chartjs-2";
 
 import { useAppSelector } from "../utilities/hooks";
-import { GameResultInterface, GlobalResults, SingleResult } from "../models";
+import { GameResultInterface } from "../models";
 import { namesData } from "./Dashboard";
 import roundToNearestProduct from "../utilities/roundToNearestProduct";
 import initialGlobalResults from "../utilities/initialGlobalResults";
