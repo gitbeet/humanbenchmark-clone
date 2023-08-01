@@ -9,6 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+
 import { useAppSelector } from "../utilities/hooks";
 import { GameResultInterface, GlobalResults, SingleResult } from "../models";
 import { namesData } from "./Dashboard";
@@ -67,6 +68,8 @@ const StatsPageGraph = ({ gameName }: Props) => {
         label: "Average users",
         data: globalChartData,
         borderColor: "rgba(43, 135, 209, 0.4)",
+        backgroundColor: "rgba(43, 135, 209, 0.4)",
+        fill: true,
         tension: 0.3,
       },
     ],
@@ -83,9 +86,7 @@ const StatsPageGraph = ({ gameName }: Props) => {
     responsive: true,
     scales: {
       y: {
-        ticks: {
-          display: false, // Set this to false to remove y-axis numbers (ticks)
-        },
+        display: false, // Set this to false to remove y-axis numbers (ticks)
       },
       x: {
         min: "0", // Set this to true to remove empty space before zero

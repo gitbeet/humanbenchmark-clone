@@ -37,9 +37,7 @@ const Statistics = ({ game }: Props) => {
     responsive: true,
     scales: {
       y: {
-        ticks: {
-          display: false, // Set this to false to remove y-axis numbers (ticks)
-        },
+        display: false, // Set this to false to remove y-axis numbers (ticks)
       },
     },
   };
