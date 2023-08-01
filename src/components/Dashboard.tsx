@@ -16,12 +16,9 @@ import IconLink from "./IconLink";
 import { calculateTimeElapsed } from "../utilities/timeLapsed";
 import { useEffect, useState } from "react";
 import roundToNearestProduct from "../utilities/roundToNearestProduct";
-import { GlobalResults } from "../models";
+import IconsColumn from "./IconsColumn";
 
 // TODO : - 1 interface with name icon and everything we need
-interface IconsDataInterface {
-  [key: string]: JSX.Element;
-}
 
 interface GameInfoInterface {
   [key: string]: GameInfoElement;
@@ -32,7 +29,7 @@ interface GameInfoElement {
   measurement: string;
 }
 
-const namesData: GameInfoInterface = {
+export const namesData: GameInfoInterface = {
   aimtrainer: { name: "Aim Trainer", measurement: "ms" },
   chimptest: { name: "Chimp Test", measurement: "points" },
   numbermemory: { name: "Number Memory", measurement: "digits" },
@@ -41,17 +38,6 @@ const namesData: GameInfoInterface = {
   typing: { name: "Typing(not finished)", measurement: "WPM" },
   verbalmemory: { name: "Verbal Memory", measurement: "points" },
   visualmemory: { name: "Visual Memory", measurement: "points" },
-};
-
-const iconsData: IconsDataInterface = {
-  aimtrainer: aimTrainerIcon,
-  chimptest: chimpTestIcon,
-  numbermemory: numberMemoryIcon,
-  reactiontime: reactionTimeIcon,
-  sequencememory: sequenceMemoryIcon,
-  typing: typingIcon,
-  verbalmemory: verbalMemoryIcon,
-  visualmemory: visualMemoryIcon,
 };
 
 const Dashboard = () => {
@@ -69,16 +55,10 @@ const Dashboard = () => {
   return (
     <div className="md:bg-neutral-100 container-transparent min-h-[100dvh]">
       <div className="flex justify-center items-stretch gap-4 ">
-        <div className="hidden md:flex md:flex-col md:items-center  bg-white  rounded-md py-4">
-          {Object.entries(iconsData).map((icon: [string, JSX.Element]) => (
-            <div className="text-light-blue opacity-50 hover:opacity-100  hover:text-orange transition-[opacity,colors] duration-50 ease-in-out scale-50">
-              <Link to={`/test/${icon[0]}`}> {icon[1]}</Link>
-            </div>
-          ))}
-        </div>
+        <IconsColumn />
         <div className="w-full space-y-4 md:space-y-4">
           {/* USER INFO SECTION */}
-          <div className="bg-white md:p-8 space-y-4">
+          <div className="bg-white md:p-8 space-y-4 rounded-md">
             <div className="">
               <p className="text-xl opacity-50">Username</p>
               <p className="text-4xl font-bold">
@@ -107,7 +87,7 @@ const Dashboard = () => {
             )}
           </div>
           {/* RESULTS SECTION */}
-          <div className="bg-white md:p-8 space-y-4">
+          <div className="bg-white md:p-8 space-y-4 rounded-md">
             <table className="w-full">
               <tbody>
                 <tr className="text-xl text-left hidden md:table-row">
@@ -116,6 +96,7 @@ const Dashboard = () => {
                   <th className="font-normal pb-8">Score</th>
                   <th className="font-normal pb-8">Percentile</th>
                 </tr>
+                {/* TODO: -type res */}
                 {Object.entries(results || {})
                   .sort()
                   .map((res: any, index) => {
@@ -201,7 +182,11 @@ const Dashboard = () => {
                             icon={playButtonIcon}
                             link={gameLink}
                           />
-                          <IconLink text="Stats" icon={statsIcon} link={`#`} />
+                          <IconLink
+                            text="Stats"
+                            icon={statsIcon}
+                            link={`/dashboard/${res[0]}`}
+                          />
                         </td>
                         <td className="text-left">
                           <span className="text-3xl font-bold">

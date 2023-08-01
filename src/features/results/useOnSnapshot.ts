@@ -27,7 +27,6 @@ export const useOnSnapshot = () => {
         result.push({ game: doc.id, result: doc.data() })
       );
       dispatch(setGlobalResults(result));
-      console.log(result);
     };
     getGlobalResults();
 

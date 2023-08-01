@@ -28,22 +28,21 @@ const Statistics = ({ game }: Props) => {
         label: "",
         data: chartData.map((data) => data[1]),
         borderColor: "#2b87d1",
+        tension: 0.3,
       },
     ],
   };
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement
-    // Title,
-    // Tooltip,
-    // Legend
-  );
+  ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
 
   const options = {
     responsive: true,
-    plugins: {},
+    scales: {
+      y: {
+        ticks: {
+          display: false, // Set this to false to remove y-axis numbers (ticks)
+        },
+      },
+    },
   };
   return (
     <h2 className="w-full h-fit p-4 bg-white flex flex-col gap-8 justify-center items-center rounded-md">

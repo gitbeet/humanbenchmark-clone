@@ -76,7 +76,7 @@ export default function Register() {
   }
 
   return (
-    <div className=" p-12 container-menu mt-8">
+    <div className=" p-12 container-menu mx-auto mt-8">
       <div className="space-y-4">
         <h1 className="text-5xl text-center text-primary-200 font-semibold ">
           Sign up
