@@ -49,11 +49,9 @@ const ChimpTest = () => {
 
     if (!isAscending) {
       setShowResultScreen(true);
-      console.log("YOU LOST");
       setTriesLeft((prev) => prev - 1);
     } else if (isAscending && resultArray.length === blocks) {
       setShowResultScreen(true);
-      console.log("YOU WON");
       setBlocks((prev) => prev + 1);
     }
     // ???

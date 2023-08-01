@@ -7,6 +7,7 @@ import returnGameData from "../utilities/returnGameData";
 import IconLink from "./IconLink";
 import { playButtonIcon } from "../assets/icons";
 import StatsPageGraph from "./StatsPageGraph";
+import NotFound from "./NotFound";
 
 const StatsPage = () => {
   const params = useParams();
@@ -28,6 +29,7 @@ const StatsPage = () => {
   );
 
   if (!path) return <h1>loading...</h1>;
+  if (!namesData[path]) return <NotFound />;
   const gameName = namesData[path].name;
   const { percentile, result } = returnGameData(
     path,

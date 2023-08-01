@@ -39,12 +39,10 @@ const StatsPageGraph = ({ gameName }: Props) => {
     initialGlobalResults.find((res) => res.game === gameName)?.result || []
   ).map((res) => [res[0], (res[1] = 0)]);
   userChartResults.forEach((res) => {
-    console.log(res);
     const ind = userChartData.findIndex((data) => Number(data[0]) === res);
     if (ind < 0) return;
     userChartData[ind][1] = userChartData[ind][1] + 1;
   });
-  console.log(userChartData);
   const globalChartData = Object.entries(
     globalResults.find((res) => res.game === gameName)?.result || []
   );
@@ -55,7 +53,6 @@ const StatsPageGraph = ({ gameName }: Props) => {
   const scale = globalMax / userMax;
 
   userChartData = [...userChartData].map((res) => [res[0], res[1] * scale]);
-  console.log(globalChartData);
   //   ChartJS
   const data = {
     labels: ["", ""],

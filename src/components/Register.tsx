@@ -41,7 +41,6 @@ export default function Register() {
     setUserData((prev) => {
       return { ...prev, [name]: value };
     });
-    console.log(userData);
   }
 
   useEffect(() => {

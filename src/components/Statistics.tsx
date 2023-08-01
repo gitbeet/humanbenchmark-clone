@@ -20,7 +20,6 @@ const Statistics = ({ game }: Props) => {
   const chartData = Object.entries(
     globalResults.filter((resData: any) => resData.game === game)[0].result
   );
-  console.log(chartData);
   const data = {
     labels: chartData.map((data) => data[0]),
     datasets: [

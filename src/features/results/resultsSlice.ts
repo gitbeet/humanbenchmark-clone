@@ -76,7 +76,6 @@ export const updateResults = createAsyncThunk(
       updatedResults[game as keyof GameResultInterface].push(result);
       return await setDoc(doc(db, "users", userUid), updatedResults);
     } catch (error) {
-      console.log(error);
       return thunkAPI.rejectWithValue(error);
     }
   }

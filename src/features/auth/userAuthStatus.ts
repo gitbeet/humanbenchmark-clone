@@ -6,7 +6,6 @@ import { useAppDispatch } from "../../utilities/hooks";
 export const useUserStatus = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    console.log("running useuserstatus");
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         dispatch(setUser(currentUser));

@@ -11,9 +11,13 @@ import GameDescription from "./GameDescription";
 import { gameDescriptions } from "../utilities/gameDescriptions";
 import { GameDescriptionInterface } from "../models";
 import Statistics from "./Statistics";
+import NotFound from "./NotFound";
+import { namesData } from "./Dashboard";
 const GameScreen = () => {
-  const params = useParams();
-  const currentGame = params.gameName?.toLowerCase() || "reactiontime";
+  const { gameName } = useParams();
+  if (!gameName) return <h1>Loading...</h1>;
+  if (!namesData[gameName]) return <NotFound />;
+  const currentGame = gameName?.toLowerCase() || "reactiontime";
   const displayedGame =
     currentGame === "aimtrainer" ? (
       <AimTrainer />

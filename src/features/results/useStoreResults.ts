@@ -9,7 +9,6 @@ export const useStoreResults = () => {
     if (user) return;
     const localstorageResults = localStorage.getItem("humanbenchmarkResults");
     if (localstorageResults == null) return;
-    console.log("after return");
     dispatch(setResults(JSON.parse(localstorageResults)));
   }, [dispatch, user]);
 

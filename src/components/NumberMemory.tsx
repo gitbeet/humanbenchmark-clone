@@ -89,18 +89,14 @@ const NumberMemory = () => {
   useEffect(() => {
     const listenerNext = (e: any) => {
       if (e.key === "Enter" || e.key === "NumpadEnter") {
-        console.log("Enter key was pressed. Run your function.");
         e.preventDefault();
         next;
-        console.log("listenernext");
       }
     };
     const listenerTryAgain = (e: any) => {
       if (e.key === "Enter" || e.key === "NumpadEnter") {
-        console.log("Enter key was pressed. Run your function.");
         e.preventDefault();
         tryAgain;
-        console.log("listenertryagain");
       }
     };
     if (showResultScreen && number === input) {

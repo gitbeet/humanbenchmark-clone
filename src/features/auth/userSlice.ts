@@ -78,9 +78,6 @@ export const register = createAsyncThunk(
     thunkAPI
   ) => {
     if (password !== confirmPassword) {
-      console.log(
-        `password : ${password}, confirmPassword : ${confirmPassword}`
-      );
       throw thunkAPI.rejectWithValue("Passwords do not match");
     }
     try {
@@ -100,13 +97,9 @@ export const register = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk("user/logout", async (_, thunkAPI) => {
-  console.log("on top");
   try {
-    console.log("in try");
     await signOut(auth);
   } catch (error: any) {
-    console.log("in catch");
-    console.log(thunkAPI.rejectWithValue(error.code));
     return thunkAPI.rejectWithValue(error.code);
   }
 });

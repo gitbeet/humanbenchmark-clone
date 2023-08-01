@@ -10,7 +10,7 @@ import {
   visualMemoryIcon,
 } from "../assets/icons";
 import { Link } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 interface IconsDataInterface {
   [key: string]: JSX.Element;
 }
@@ -35,7 +35,7 @@ const IconsColumn = () => {
             key={index}
             className="text-light-blue opacity-50 hover:opacity-100  hover:text-orange transition-[opacity,colors] duration-50 ease-in-out scale-50"
           >
-            <Link to={`/test/${icon[0]}`}> {icon[1]}</Link>
+            <Link to={`/dashboard/${icon[0]}`}> {icon[1]}</Link>
           </div>
         )
       )}

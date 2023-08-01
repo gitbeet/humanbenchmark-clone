@@ -67,7 +67,6 @@ const ReactionTime = () => {
   }, [results]);
 
   const startGame = () => {
-    console.log("Start game");
     const delay = Math.floor(1000 + Math.random() * 1000);
     setMessage(waitForGreenMessage);
     setReactionTime(null);
@@ -76,7 +75,6 @@ const ReactionTime = () => {
 
   const endGame = () => {
     setStartTime(null);
-    console.log("End game");
     setGameStarted(false);
     if (!readyToClick) {
       setMessage(
