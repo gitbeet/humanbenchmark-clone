@@ -11,7 +11,7 @@ const Header = () => {
   };
   return (
     <div className="container-mine shadow-md bg-white">
-      <div className="py-3 px-8 flex justify-between items-center  text-neutral-900 wrapper">
+      <div className="py-3 px-4 flex justify-between items-center  text-neutral-900 wrapper">
         <div className="flex gap-6">
           <div className="flex  justify-center items-center w-fit gap-1">
             <svg
@@ -51,7 +51,10 @@ const Header = () => {
               </Link>
             </>
           ) : (
-            <p onClick={func} className="font-semibold text-lg cursor-pointer">
+            <p
+              onClick={func}
+              className="font-semibold text-lg cursor-pointer"
+            >
               LOGOUT
             </p>
           )}

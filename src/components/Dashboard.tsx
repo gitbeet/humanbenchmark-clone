@@ -58,7 +58,7 @@ const Dashboard = () => {
         <IconsColumn />
         <div className="w-full space-y-4 md:space-y-4">
           {/* USER INFO SECTION */}
-          <div className="bg-white md:p-8 space-y-4 rounded-md">
+          <div className="bg-white px-4 md:p-8 space-y-4 rounded-md ">
             <div className="">
               <p className="text-xl opacity-50">Username</p>
               <p className="text-4xl font-bold">
@@ -180,7 +180,7 @@ const Dashboard = () => {
                           key={index}
                           className={`${
                             isEven ? "" : "bg-neutral-50"
-                          } hidden md:block `}
+                          } hidden md:table-row `}
                         >
                           <td className="px-2 py-3 text-left text-xl font-bold ">
                             {gameName}
@@ -206,7 +206,14 @@ const Dashboard = () => {
                             </span>
                           </td>
                           <td className="text-center py-1">
-                            <div className=" bg-neutral-200 text-white w-[full] h-8 rounded-sm">
+                            <div
+                              className={`bg-neutral-200  ${
+                                typeof percentile === "number" &&
+                                percentile > 50
+                                  ? "text-neutral-50"
+                                  : "text-neutral-900"
+                              } font-semibold text-lg rounded-sm`}
+                            >
                               <div
                                 style={{
                                   width: `${
@@ -215,7 +222,7 @@ const Dashboard = () => {
                                       : 0
                                   }%`,
                                 }}
-                                className="bg-blue h-full py-1 "
+                                className="bg-blue flex items-center  h-full py-1 "
                               >
                                 <p className="pl-2">
                                   {typeof percentile === "number"
@@ -257,12 +264,12 @@ const Dashboard = () => {
                             {/* percentile graph */}
                             <div className="text-center py-1">
                               <div
-                                className={`w-full h-10 bg-neutral-100 ${
+                                className={`w-full h-10 bg-neutral-200 ${
                                   typeof percentile === "number" &&
                                   percentile > 50
                                     ? "text-neutral-50"
                                     : "text-neutral-900"
-                                } font-semibold text-xl rounded-sm`}
+                                } font-semibold text-lg rounded-sm`}
                               >
                                 {/* blue  */}
                                 <div
@@ -273,7 +280,7 @@ const Dashboard = () => {
                                         : 0
                                     }%`,
                                   }}
-                                  className="bg-light-blue h-full py-1 flex items-center"
+                                  className="bg-blue h-full py-1 flex items-center"
                                 >
                                   <p className="pl-2">
                                     {typeof percentile === "number"
