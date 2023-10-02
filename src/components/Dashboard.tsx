@@ -75,11 +75,17 @@ const Dashboard = () => {
             </div>
             {!user && (
               <p className="text-xl">
-                <Link className="text-blue" to="/login">
+                <Link
+                  className="text-blue"
+                  to="/login"
+                >
                   Log in
                 </Link>{" "}
                 or{" "}
-                <Link className="text-blue" to="/login">
+                <Link
+                  className="text-blue"
+                  to="/login"
+                >
                   sign up
                 </Link>{" "}
                 to save your results
@@ -169,54 +175,117 @@ const Dashboard = () => {
                     }
                     const isEven = index % 2 === 0;
                     return (
-                      <tr
-                        key={index}
-                        className={`${isEven ? "" : "bg-neutral-50"}`}
-                      >
-                        <td className="px-2 py-3 text-left text-xl font-semibold">
-                          {gameName}
-                        </td>
-                        <td className="md:flex md:flex-row gap-4 justify-center items-center py-3">
-                          <IconLink
-                            text="Play"
-                            icon={playButtonIcon}
-                            link={gameLink}
-                          />
-                          <IconLink
-                            text="Stats"
-                            icon={statsIcon}
-                            link={`/dashboard/${res[0]}`}
-                          />
-                        </td>
-                        <td className="text-left">
-                          <span className="text-3xl font-bold">
-                            {res[1].length < 1 ? "?" : result}{" "}
-                          </span>
-                          <span className="">
-                            {res[1].length < 1 ? "" : gameMeasurement}
-                          </span>
-                        </td>
-                        <td className="text-center py-1">
-                          <div className=" bg-neutral-200 text-white w-[full] h-8 rounded-sm">
-                            <div
-                              style={{
-                                width: `${
-                                  typeof percentile === "number"
-                                    ? percentile
-                                    : 0
-                                }%`,
-                              }}
-                              className="bg-blue h-full py-1 "
-                            >
-                              <p className="pl-2">
-                                {typeof percentile === "number"
-                                  ? `${percentile}%`
-                                  : "?"}
-                              </p>
+                      <>
+                        <tr
+                          key={index}
+                          className={`${
+                            isEven ? "" : "bg-neutral-50"
+                          } hidden md:block `}
+                        >
+                          <td className="px-2 py-3 text-left text-xl font-bold ">
+                            {gameName}
+                          </td>
+                          <td className="md:flex md:flex-row gap-4 justify-center items-center py-3">
+                            <IconLink
+                              text="Play"
+                              icon={playButtonIcon}
+                              link={gameLink}
+                            />
+                            <IconLink
+                              text="Stats"
+                              icon={statsIcon}
+                              link={`/dashboard/${res[0]}`}
+                            />
+                          </td>
+                          <td className="text-left">
+                            <span className="text-3xl font-bold">
+                              {res[1].length < 1 ? "?" : result}{" "}
+                            </span>
+                            <span className="">
+                              {res[1].length < 1 ? "" : gameMeasurement}
+                            </span>
+                          </td>
+                          <td className="text-center py-1">
+                            <div className=" bg-neutral-200 text-white w-[full] h-8 rounded-sm">
+                              <div
+                                style={{
+                                  width: `${
+                                    typeof percentile === "number"
+                                      ? percentile
+                                      : 0
+                                  }%`,
+                                }}
+                                className="bg-blue h-full py-1 "
+                              >
+                                <p className="pl-2">
+                                  {typeof percentile === "number"
+                                    ? `${percentile}%`
+                                    : "?"}
+                                </p>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                      </tr>
+                          </td>
+                        </tr>
+                        {/* MOBILE ROW */}
+                        <tr className="grid grid-cols-2 items-end md:hidden px-4 py-2">
+                          <td className="w-full">
+                            <p className="text-left text-xl font-bold ">
+                              {gameName}
+                            </p>
+                            <div className="md:flex md:flex-row gap-4 justify-center items-center">
+                              <IconLink
+                                text="Play"
+                                icon={playButtonIcon}
+                                link={gameLink}
+                              />
+                              <IconLink
+                                text="Stats"
+                                icon={statsIcon}
+                                link={`/dashboard/${res[0]}`}
+                              />
+                            </div>
+                          </td>
+                          <td className={`flex flex-col`}>
+                            <div className="text-left">
+                              <span className="text-3xl font-bold">
+                                {res[1].length < 1 ? "?" : result}{" "}
+                              </span>
+                              <span className="">
+                                {res[1].length < 1 ? "" : gameMeasurement}
+                              </span>
+                            </div>
+                            {/* percentile graph */}
+                            <div className="text-center py-1">
+                              <div
+                                className={`w-full h-10 bg-neutral-100 ${
+                                  typeof percentile === "number" &&
+                                  percentile > 50
+                                    ? "text-neutral-50"
+                                    : "text-neutral-900"
+                                } font-semibold text-xl rounded-sm`}
+                              >
+                                {/* blue  */}
+                                <div
+                                  style={{
+                                    width: `${
+                                      typeof percentile === "number"
+                                        ? percentile
+                                        : 0
+                                    }%`,
+                                  }}
+                                  className="bg-light-blue h-full py-1 flex items-center"
+                                >
+                                  <p className="pl-2">
+                                    {typeof percentile === "number"
+                                      ? `${percentile}%`
+                                      : "?"}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </>
                     );
                   })}
               </tbody>

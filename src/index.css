@@ -2,12 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+.grid-table {
+  display: grid;
+  grid-template-areas:
+    "title" "title"
+    "buttons" "stats"
+  ;
+}
+
+.grid-area--stats {
+  grid-area: stats;
+}
+
+
+
+.grid-area--title {
+  grid-area: title;
+}
+
+
+
+.grid-area--buttons {
+  grid-area: buttons;
+}
+
 .wrapper {
   @apply w-[min(100%,1024px)];
 }
 
 .container-menu {
-  @apply md:w-[min(90%,970px)]   bg-white rounded-md md:shadow-md;
+  @apply md:w-[min(90%,970px)] bg-white rounded-md md:shadow-md;
 }
 
 .container-transparent {
@@ -52,16 +76,16 @@ input {
   0% {
     background-color: #f53264;
   }
-  100% {
-  }
+
+  100% {}
 }
 
 @keyframes flash-white {
   0% {
     background-color: #e6e8f4;
   }
-  100% {
-  }
+
+  100% {}
 }
 
 @keyframes appear {
@@ -69,6 +93,7 @@ input {
     transform: scale(0%);
     /* opacity: 0; */
   }
+
   100% {
     transform: scale(100%);
     /* opacity: 1; */
@@ -79,6 +104,7 @@ input {
   0% {
     transform: scaleX(100%);
   }
+
   100% {
     transform: scaleX(0%);
   }
@@ -141,7 +167,7 @@ img {
 }
 
 /* Natural flow and rhythm in articles by default */
-article > * + * {
+article>*+* {
   margin-top: 1em;
 }
 

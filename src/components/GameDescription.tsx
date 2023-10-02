@@ -6,7 +6,7 @@ interface Props {
 
 const GameDescription = ({ description }: Props) => {
   return (
-    <div className="w-full bg-white rounded-md md:p-8 space-y-12">
+    <div className="w-full bg-white rounded-md px-4 md:p-8 space-y-12">
       <h1 className="text-3xl">About the test</h1>
       <p className="text-lg">{description}</p>
     </div>

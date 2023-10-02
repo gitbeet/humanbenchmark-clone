@@ -4,14 +4,14 @@ interface Props {
   description: string;
   newGame: boolean;
   gameId:
-    | "typing"
-    | "reactionTime"
-    | "sequenceMemory"
-    | "aimTrainer"
-    | "numberMemory"
-    | "verbalMemory"
-    | "chimpTest"
-    | "visualMemory";
+  | "typing"
+  | "reactionTime"
+  | "sequenceMemory"
+  | "aimTrainer"
+  | "numberMemory"
+  | "verbalMemory"
+  | "chimpTest"
+  | "visualMemory";
 }
 
 const GameItem = ({ icon, title, description, newGame }: Props) => {
@@ -25,7 +25,7 @@ const GameItem = ({ icon, title, description, newGame }: Props) => {
       </div>
       <p className="text-lg  text-center">{description}</p>
       {newGame ? (
-        <div className="absolute top-0 left-full -translate-x-[calc(100%-5px)] -translate-y-[5px] bg-red text-white text-lg px-2 py-1 rounded-lg">
+        <div className="absolute top-0 left-full -translate-x-[calc(100%+2rem)] md:-translate-x-[calc(100%-5px)] -translate-y-[5px] bg-red text-white text-lg px-2 py-1 rounded-lg">
           New
         </div>
       ) : null}
