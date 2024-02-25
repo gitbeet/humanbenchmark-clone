@@ -73,7 +73,7 @@ const ChimpTest = () => {
     );
     setResultArray((prev) => [...prev, value]);
   };
-
+  console.log(grid);
   return (
     <div className="game-window bg-blue">
       {!gameStarted ? (
@@ -147,21 +147,23 @@ const ChimpTest = () => {
             box.visible ? (
               <div
                 key={index}
-                onClick={() => onItemClick(box.value, index)}
+                onClick={() =>
+                  box.value ? onItemClick(box.value, index) : void 0
+                }
                 className={`${
                   box.value
-                    ? "border-4 border-neutral-blue border-opacity-50 hover:border-opacity-100"
+                    ? "border-4 border-neutral-blue border-opacity-50 hover:border-opacity-100 cursor-pointer"
                     : ""
-                } ${
+                }  ${
                   !showNumbers && box.value && "bg-white border-0"
-                } w-20 h-20 rounded-xl flex justify-center items-center text-white font-semibold text-5xl cursor-pointer transition-all duration-75 `}
+                } w-20 h-20 rounded-xl flex justify-center items-center text-white font-semibold text-5xl transition-all duration-75 `}
               >
                 {showNumbers ? box.value : ""}
               </div>
             ) : (
               <div
                 key={index}
-                className="w-16 h-16 rounded-lg flex justify-center items-center text-white font-semibold text-3xl cursor-pointer"
+                className="w-16 h-16 rounded-lg flex justify-center items-center  font-semibold text-3xl"
               ></div>
             )
           )}

@@ -69,7 +69,7 @@ const ResultsScreen = ({
 
   return (
     <div className="bg-blue game-window text-white text-center">
-      <p className="text-xl text-neutral-900">{currentGame}</p>
+      {/* <p className="text-xl text-neutral-900">{currentGame}</p> */}
       <div className="scale-150 ">{logo}</div>
       <div className="space-y-2">
         <p className="text-3xl">{heading}</p>
@@ -77,8 +77,15 @@ const ResultsScreen = ({
       </div>
       <p>Save your score to see how you compare.</p>
       <div className="flex gap-4">
-        <Button text="Save Score" color="yellow" onClick={handleUpdateRes} />
-        <Button text="Try Again" onClick={onCLickTryAgain} />
+        <Button
+          text="Save Score"
+          color="yellow"
+          onClick={handleUpdateRes}
+        />
+        <Button
+          text="Try Again"
+          onClick={onCLickTryAgain}
+        />
       </div>
     </div>
   );
