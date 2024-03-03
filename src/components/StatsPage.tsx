@@ -39,7 +39,7 @@ const StatsPage = () => {
   );
   const gameMeasurement = namesData[path].measurement;
   return (
-    <div className="md:bg-neutral-100 container-transparent min-h-[100dvh]">
+    <div className="md:bg-neutral-100 container-transparent min-h-[100dvh]  px-4 md:px-0">
       <div className="flex justify-center items-stretch gap-4 ">
         {/* LEFT SIDE ICONS */}
         <IconsColumn />
@@ -47,19 +47,28 @@ const StatsPage = () => {
         <div className="w-full space-y-4 md:space-y-4">
           {/* USER INFO SECTION */}
           <div className="bg-white md:p-8 space-y-4 rounded-md text-3xl ">
-            <Link to="/dashboard" className=" font-semibold text-light-blue">
+            <Link
+              to="/dashboard"
+              className=" font-semibold text-light-blue"
+            >
               {user ? user.displayName : "Guest user"}
             </Link>
             <span className="ml-2">&gt; {gameName}</span>
             {!user ? (
               <div className="text-lg">
-                <Link className="text-light-blue" to="/../login">
+                <Link
+                  className="text-light-blue"
+                  to="/../login"
+                >
                   Log in
                 </Link>
                 <span>
                   {" "}
                   or{" "}
-                  <Link className="text-light-blue" to="/../register">
+                  <Link
+                    className="text-light-blue"
+                    to="/../register"
+                  >
                     Sign up
                   </Link>{" "}
                   to save your results
