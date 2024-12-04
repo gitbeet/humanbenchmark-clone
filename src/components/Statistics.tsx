@@ -42,10 +42,13 @@ const Statistics = ({ game }: Props) => {
     },
   };
   return (
-    <h2 className="w-full h-fit p-4 bg-white flex flex-col gap-8 justify-center items-center rounded-md">
+    <div className="w-full h-fit p-4 bg-white flex flex-col gap-8 justify-center items-center rounded-md">
       <h1 className="self-start text-3xl">Statistics</h1>
-      <Line data={data} options={options} />
-    </h2>
+      <Line
+        data={data}
+        options={options}
+      />
+    </div>
   );
 };
 
