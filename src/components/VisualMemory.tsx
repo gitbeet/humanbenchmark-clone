@@ -193,16 +193,16 @@ const VisualMemory = () => {
                   onClick={() => handleClick(index)}
                   key={index}
                   // TODO : change width on grid size (to not overflow)
-                  className={` w-full h-full rounded-[10%]  overflow-visible relative`}
+                  className="w-full h-full rounded-[10%]  overflow-visible relative"
                 >
                   <div
                     className={`${
                       el.box && el.visible && initialTurn
-                        ? "bg-white animation_box__turn "
+                        ? "bg-white animation_box__turn"
                         : el.box && el.visible && !initialTurn
-                        ? "bg-white animation_box__turn__clicked "
+                        ? "bg-white animation_box__turn__clicked"
                         : !el.box && el.visible && !initialTurn
-                        ? "bg-very-dark-blue animation_empty__turn "
+                        ? "bg-very-dark-blue animation_empty__turn"
                         : "bg-dark-blue  "
                     } w-full h-full rounded-[10%] relative z-10`}
                   ></div>

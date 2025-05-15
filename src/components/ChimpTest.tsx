@@ -142,32 +142,39 @@ const ChimpTest = () => {
           )}
         </>
       ) : (
-        <div className="w-fit h-fit px-16 py-12 grid grid-cols-8 grid-rows-5 gap-2">
-          {grid.map((box, index) =>
-            box.visible ? (
-              <div
-                key={index}
-                onClick={() =>
-                  box.value ? onItemClick(box.value, index) : void 0
-                }
-                className={`${
-                  box.value
-                    ? "border-4 border-neutral-blue border-opacity-50 hover:border-opacity-100 cursor-pointer"
-                    : ""
-                }  ${
-                  !showNumbers && box.value && "bg-white border-0"
-                } w-20 h-20 rounded-xl flex justify-center items-center text-white font-semibold text-5xl transition-all duration-75 `}
-              >
-                {showNumbers ? box.value : ""}
-              </div>
-            ) : (
-              <div
-                key={index}
-                className="w-16 h-16 rounded-lg flex justify-center items-center  font-semibold text-3xl"
-              ></div>
-            )
-          )}
-        </div>
+        <>
+          <div className="md:hidden">
+            <p className="bg-yellow text-neutral-900 font-semibold shadow rounded p-4">
+              This test is meant for larger screens
+            </p>
+          </div>
+          <div className="hidden md:grid px-16 py-12  grid-cols-8 grid-rows-5 gap-2 shrink-0">
+            {grid.map((box, index) =>
+              box.visible ? (
+                <div
+                  key={index}
+                  onClick={() =>
+                    box.value ? onItemClick(box.value, index) : void 0
+                  }
+                  className={`${
+                    box.value
+                      ? "border-4 border-neutral-blue border-opacity-50 hover:border-opacity-100 cursor-pointer"
+                      : ""
+                  }  ${
+                    !showNumbers && box.value && "bg-white border-0"
+                  } w-16 h-16  rounded-xl flex justify-center items-center text-white font-semibold text-5xl transition-all duration-75 `}
+                >
+                  {showNumbers ? box.value : ""}
+                </div>
+              ) : (
+                <div
+                  key={index}
+                  className="w-16 h-16 rounded-lg flex justify-center items-center  font-semibold text-3xl"
+                ></div>
+              )
+            )}
+          </div>
+        </>
       )}
     </div>
   );
